@@ -1,12 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import HomeScreen from './screens/homeScreen';
 
 export default function App() {
+
+  const [page, setPage] = useState('home');
+
+  const goHome = () => setPage('home');
+
+  const selectedPage = () => {
+    switch (page) {
+      case 'camera': return <HomeScreen onSetPage={setPage} />;
+      case 'info': return <HomeScreen onSetPage={setPage} />;
+      case 'background': return <HomeScreen onSetPage={setPage} />;
+      case 'home': return <HomeScreen onSetPage={setPage} />;
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
       <StatusBar style="auto" />
+
+      {selectedPage()}
+      
     </View>
   );
 }
