@@ -10,7 +10,6 @@ export default function AccelerometerInfo() {
     z: 0,
   });
 
-  //find what any is.
   const [subscription, setSubscription] = useState<Subscription | null>(null);
 
   const slow = () => {
