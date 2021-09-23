@@ -3,11 +3,9 @@ import { Platform, Text, View, StyleSheet } from "react-native";
 import * as Device from "expo-device";
 
 export default function DeviceInfo() {
-  console.log("Device", Device);
-
   return (
     <View style={styles.container}>
-      <Text style={styles.Rubrik}>DeviceInfo:</Text>
+      <Text style={styles.title}>DeviceInfo:</Text>
       <Text style={styles.paragraph}>IsDevice: {Device.isDevice} </Text>
       <Text style={styles.paragraph}>brand: {Device.brand} </Text>
       <Text style={styles.paragraph}>manufacturer: {Device.manufacturer} </Text>
@@ -37,7 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
   },
-  Rubrik: {
+  title: {
     fontSize: 20,
     textAlign: "left",
   },

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Platform, Text, View, StyleSheet } from "react-native";
 import Constants from "expo-constants";
-import Location, { LocationObject } from "expo-location";
+import * as Location from "expo-location";
+import { LocationObject } from "expo-location";
 
 export default function LocationInfo() {
   const [location, setLocation] = useState<LocationObject | null>(null);
@@ -20,9 +21,9 @@ export default function LocationInfo() {
         setErrorMsg("Permission to access location was denied");
         return;
       }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      Location.getCurrentPositionAsync()
+        .then((location) => setLocation(location))
+        .catch((error) => setErrorMsg(error.message));
     })();
   }, []);
 
