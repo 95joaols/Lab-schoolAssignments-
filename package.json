@@ -18,7 +18,8 @@
     "react-native-web": "~0.13.12",
     "expo-sensors": "~10.2.2",
     "expo-device": "~3.3.0",
-    "expo-location": "~12.1.2"
+    "expo-location": "~12.1.2",
+    "expo-camera": "~11.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

@@ -6,6 +6,7 @@ import BackgroundSelectorScreen from "./screens/BackgroundSelectorScreen";
 import React, { useState } from 'react';
 import HomeScreen from './screens/homeScreen';
 import MapScreen from './screens/mapScreen';
+import CameraScreen from './screens/cameraScreen';
 
 
 export default function App() {
@@ -16,7 +17,7 @@ export default function App() {
 
   const selectedPage = () => {
     switch (page) {
-      case 'camera': return <HomeScreen onSetPage={setPage} />;
+      case 'camera': return <CameraScreen />;
       case 'info': return <HomeScreen onSetPage={setPage} />;
       case 'background': return <BackgroundSelectorScreen onSetPage={setPage} />;
       case 'map': return <MapScreen />;
