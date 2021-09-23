@@ -32,7 +32,7 @@ const MapScreen = ({ onGoBack }: Props) => {
           latitude: location.latitude,
           longitude: location.longitude,
           latitudeDelta: 0.04,
-          longitudeDelta: 0.06,
+          longitudeDelta: 0.03,
         }}>
         <Marker
           coordinate={{
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    height: "90%",
   },
   buttonsContainer: {
     flexDirection: "row",
