@@ -23,7 +23,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-c
+
       {selectedPage()}
       
     </View>
