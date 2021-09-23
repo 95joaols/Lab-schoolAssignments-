@@ -1,16 +1,15 @@
 import React, { FC, useContext, useEffect } from "react";
-import { Button, Platform, View, StyleSheet } from "react-native";
+import { Platform, View, Pressable, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { BackgroundImageContext } from "../contexts/BackgroundImageContext";
+import { styles } from "../constants/Styles";
 
 interface Props {
-    onSetPage: (page: string) => void;
+  onSetPage: (page: string) => void;
 }
 
-const BackgroundSelectorScreen: FC<Props> = ({onSetPage}) => {
-  const { setBackgroundImage } = useContext(
-    BackgroundImageContext
-  );
+const BackgroundSelectorScreen: FC<Props> = ({ onSetPage }) => {
+  const { setBackgroundImage } = useContext(BackgroundImageContext);
 
   useEffect(() => {
     (async () => {
@@ -39,18 +38,14 @@ const BackgroundSelectorScreen: FC<Props> = ({onSetPage}) => {
 
   return (
     <View style={styles.root}>
-      <Button title="Välj bakgrundsbild" onPress={pickImage} />
-      <Button title="Tillbaka" onPress={() => onSetPage("home")} />
+      <Pressable onPress={pickImage} style={styles.button}>
+        <Text style={styles.buttonText}>Välj bakgrundsbild</Text>
+      </Pressable>
+      <Pressable onPress={() => onSetPage("home")} style={styles.button}>
+        <Text style={styles.buttonText}>Tillbaka</Text>
+      </Pressable>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-    root: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center"
-    }
-})
 
 export default BackgroundSelectorScreen;
