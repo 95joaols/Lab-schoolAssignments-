@@ -15,7 +15,7 @@ export default function App() {
       case 'camera': return <HomeScreen onSetPage={setPage} />;
       case 'info': return <HomeScreen onSetPage={setPage} />;
       case 'background': return <HomeScreen onSetPage={setPage} />;
-      case 'map': return <MapScreen />;
+      case 'map': return <MapScreen onGoBack={goHome} />;
       case 'home': return <HomeScreen onSetPage={setPage} />;
     }
   }
