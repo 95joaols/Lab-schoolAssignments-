@@ -18,7 +18,7 @@ interface Props {
   onGoBack: () => void;
 }
 
-const MapScreen = ({ onGoBack }: Props) => {
+function MapScreen ({ onGoBack }: Props) {
   const [location, setLocation] = useState<IGeolocation>({
     latitude: 57.72107,
     longitude: 12.93982,
