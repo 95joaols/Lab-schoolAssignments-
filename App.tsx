@@ -18,7 +18,7 @@ export default function App() {
     switch (page) {
       case 'camera': return <HomeScreen onSetPage={setPage} />;
       case 'info': return <HomeScreen onSetPage={setPage} />;
-      case 'background': return <BackgroundSelectorScreen />;
+      case 'background': return <BackgroundSelectorScreen onSetPage={setPage} />;
       case 'map': return <MapScreen />;
       case 'home': return <HomeScreen onSetPage={setPage} />;
     }

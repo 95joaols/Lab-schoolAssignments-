@@ -3,7 +3,11 @@ import { Button, Platform, View, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { BackgroundImageContext } from "../contexts/BackgroundImageContext";
 
-const BackgroundSelectorScreen: FC = () => {
+interface Props {
+    onSetPage: (page: string) => void;
+}
+
+const BackgroundSelectorScreen: FC<Props> = ({onSetPage}) => {
   const { setBackgroundImage } = useContext(
     BackgroundImageContext
   );
@@ -36,6 +40,7 @@ const BackgroundSelectorScreen: FC = () => {
   return (
     <View style={styles.root}>
       <Button title="Välj bakgrundsbild" onPress={pickImage} />
+      <Button title="Tillbaka" onPress={() => onSetPage("home")} />
     </View>
   );
 };
