@@ -2,7 +2,7 @@ import * as React from 'react';
 import MapView from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
-export default function App() {
+function MapScreen (){
   return (
     <View style={styles.container}>
       <MapView style={styles.map} />
@@ -22,3 +22,5 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height,
   },
 });
+
+export default MapScreen;
