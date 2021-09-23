@@ -31,8 +31,8 @@ function MapScreen ({ onGoBack }: Props) {
         initialRegion={{
           latitude: location.latitude,
           longitude: location.longitude,
-          latitudeDelta: 0.04,
-          longitudeDelta: 0.03,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
         }}>
         <Marker
           coordinate={{
