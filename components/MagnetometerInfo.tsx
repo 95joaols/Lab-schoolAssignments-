@@ -11,15 +11,15 @@ export default function MagnetometerInfo() {
   });
   const [subscription, setSubscription] = useState<Subscription | null>(null);
 
-  const _slow = () => {
+  const slow = () => {
     Magnetometer.setUpdateInterval(1000);
   };
 
-  const _fast = () => {
+  const fast = () => {
     Magnetometer.setUpdateInterval(16);
   };
 
-  const _subscribe = () => {
+  const subscribe = () => {
     setSubscription(
       Magnetometer.addListener((result) => {
         setData(result);
@@ -27,14 +27,14 @@ export default function MagnetometerInfo() {
     );
   };
 
-  const _unsubscribe = () => {
+  const unsubscribe = () => {
     subscription && subscription.remove();
     setSubscription(null);
   };
 
   useEffect(() => {
-    _subscribe();
-    return () => _unsubscribe();
+    subscribe();
+    return () => unsubscribe();
   }, []);
 
   const { x, y, z } = data;
@@ -46,18 +46,18 @@ export default function MagnetometerInfo() {
       </Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={subscription ? _unsubscribe : _subscribe}
+          onPress={subscription ? unsubscribe : subscribe}
           style={styles.button}
         >
           <Text>{subscription ? "On" : "Off"}</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={_slow}
+          onPress={slow}
           style={[styles.button, styles.middleButton]}
         >
           <Text>Slow</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={_fast} style={styles.button}>
+        <TouchableOpacity onPress={fast} style={styles.button}>
           <Text>Fast</Text>
         </TouchableOpacity>
       </View>
