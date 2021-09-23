@@ -1,8 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View } from "react-native";
+import BackgroundImage from "./components/BackgroundImage";
+import BackgroundImageProvider from "./contexts/BackgroundImageContext";
+import BackgroundSelectorScreen from "./screens/BackgroundSelectorScreen";
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './screens/homeScreen';
 import MapScreen from './screens/mapScreen';
+
 
 export default function App() {
 
@@ -14,7 +18,7 @@ export default function App() {
     switch (page) {
       case 'camera': return <HomeScreen onSetPage={setPage} />;
       case 'info': return <HomeScreen onSetPage={setPage} />;
-      case 'background': return <HomeScreen onSetPage={setPage} />;
+      case 'background': return <BackgroundSelectorScreen onSetPage={setPage} />;
       case 'map': return <MapScreen onGoBack={goHome} />;
       case 'home': return <HomeScreen onSetPage={setPage} />;
     }
@@ -22,10 +26,12 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <BackgroundImageProvider>
+        <BackgroundImage />
+        <StatusBar style="auto" />
+        {selectedPage()}
+      </BackgroundImageProvider>
 
-      {selectedPage()}
-      
     </View>
   );
 }
@@ -33,8 +39,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
