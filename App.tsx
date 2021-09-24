@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import HomeScreen from "./screens/homeScreen";
 import MapScreen from "./screens/mapScreen";
 import { styles } from "./constants/Styles";
+import InfoScreen from "./screens/InfoScreen";
 
 export default function App() {
   const [page, setPage] = useState("home");
@@ -18,7 +19,7 @@ export default function App() {
       case "camera":
         return <HomeScreen onSetPage={setPage} />;
       case "info":
-        return <HomeScreen onSetPage={setPage} />;
+        return <InfoScreen />;
       case "background":
         return <BackgroundSelectorScreen onSetPage={setPage} />;
       case "map":
