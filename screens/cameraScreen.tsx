@@ -1,20 +1,12 @@
 import { Camera } from 'expo-camera';
 import { CameraType } from 'expo-camera/build/Camera.types';
 import React, { FC, useEffect, useState } from 'react';
-import { Alert, Button, Text, View, StyleSheet } from 'react-native';
+import { TouchableOpacity, Alert, Button, Text, View, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({  
-  cameraContainer: {
-    flex: 1,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
   errorContainer: {  
     flex: 1,
-    alignSelf: 'stretch',
-    backgroundColor: 'brown',
+    backgroundColor: '#ffffff',
     justifyContent: 'center',
     flexDirection: 'column',
     alignItems: 'center'
@@ -22,11 +14,24 @@ const styles = StyleSheet.create({
   camera: {
     flex: 1,
     alignSelf: 'stretch',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center'
   },
   text: {
     color: '#ffffff'
+  },
+  roundButton: {
+    width: 100,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 100,
+    backgroundColor: 'red',
+  },
+  div: {
+    display: 'flex',
+    flexDirection: 'row'
   }
 })
 
@@ -69,19 +74,19 @@ const CameraScreen: FC = () => {
   if (!cameraPermission) {
     return (
       <View style={styles.errorContainer}>
-        <Text style={{color: "red"}}>Needs permission to access camera</Text>
+        <Text style={{color: "red"}}>Error: Needs permission to access camera</Text>
       </View>
     )
   }
 
   return (
-    <View style={styles.cameraContainer}>
-      <Camera type={cameraType} ref={(reference) => {camera = reference}} style={styles.camera} useCamera2Api onCameraReady={statusCameraReady} onMountError={onError}>
-        {cameraType === Camera.Constants.Type.front ? <Text style={styles.text}>Selfie mode</Text> : <Text style={styles.text}>Boring mode</Text>}
+    <Camera ratio={'16:9'} type={cameraType} ref={(reference) => {camera = reference}} style={styles.camera} useCamera2Api onCameraReady={statusCameraReady} onMountError={onError}>
+      {cameraType === Camera.Constants.Type.front ? <Text style={styles.text}>Selfie mode</Text> : <Text style={styles.text}>Boring mode</Text>}
+      <View style={styles.div}>
         <Button title="Flip" onPress={() => {setCameraType (cameraType === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back)}} />
-        <Button title="Take picture" onPress={takePicture} />
-      </Camera>
-    </View>
+        <TouchableOpacity style={styles.roundButton} onPress={takePicture} />
+      </View>
+    </Camera>
   );
 };
 
