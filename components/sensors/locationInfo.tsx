@@ -3,7 +3,7 @@ import { Platform, Text, View, StyleSheet } from "react-native";
 import Constants from "expo-constants";
 import Location, { LocationObject } from "expo-location";
 
-export default function locationInfo() {
+export default function LocationInfo() {
   const [location, setLocation] = useState<LocationObject | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -35,6 +35,7 @@ export default function locationInfo() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Location:</Text>
       <Text style={styles.paragraph}>{text}</Text>
     </View>
   );
@@ -43,12 +44,16 @@ export default function locationInfo() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
-    padding: 20,
+    paddingLeft: 20,
+  },
+  title: {
+    fontSize: 20,
+    textAlign: "left",
   },
   paragraph: {
     fontSize: 18,
-    textAlign: "center",
+    textAlign: "left",
   },
 });
