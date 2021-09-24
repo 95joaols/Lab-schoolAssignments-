@@ -10,10 +10,10 @@ export const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: "#8E9080",
-        padding: "8px",
-        margin: "8px",
+        padding: 8,
+        margin: 8,
         borderRadius: 20,
-        width: "30%"
+        width: "50%"
     },
     buttonText: {
         textAlign: "center",
@@ -29,4 +29,4 @@ export const styles = StyleSheet.create({
         resizeMode: "cover",
         zIndex: -1,
     },
-})
+});

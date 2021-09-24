@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, TouchableHighlight } from "react-native";
 import { styles } from "../constants/Styles";
 
 interface Props {
@@ -9,18 +9,18 @@ interface Props {
 function HomeScreen({ onSetPage }: Props) {
   return (
     <View style={styles.root}>
-      <Pressable onPress={() => onSetPage("camera")} style={styles.button}>
+      <TouchableHighlight onPress={() => onSetPage("camera")} style={styles.button}>
         <Text style={styles.buttonText}>Kamera</Text>
-      </Pressable>
-      <Pressable onPress={() => onSetPage("info")} style={styles.button}>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => onSetPage("info")} style={styles.button}>
         <Text style={styles.buttonText}>Info</Text>
-      </Pressable>
-      <Pressable onPress={() => onSetPage("background")} style={styles.button}>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => onSetPage("background")} style={styles.button}>
         <Text style={styles.buttonText}>Bakgrundsbild</Text>
-      </Pressable>
-      <Pressable onPress={() => onSetPage("map")} style={styles.button}>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => onSetPage("map")} style={styles.button}>
         <Text style={styles.buttonText}>Karta</Text>
-      </Pressable>
+      </TouchableHighlight>
     </View>
   );
 }

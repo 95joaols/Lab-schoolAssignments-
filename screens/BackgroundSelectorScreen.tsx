@@ -1,5 +1,5 @@
 import React, { FC, useContext, useEffect } from "react";
-import { Platform, View, Pressable, Text } from "react-native";
+import { Platform, View, Text, TouchableHighlight } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { BackgroundImageContext } from "../contexts/BackgroundImageContext";
 import { styles } from "../constants/Styles";
@@ -38,12 +38,12 @@ const BackgroundSelectorScreen: FC<Props> = ({ onSetPage }) => {
 
   return (
     <View style={styles.root}>
-      <Pressable onPress={pickImage} style={styles.button}>
+      <TouchableHighlight onPress={pickImage} style={styles.button}>
         <Text style={styles.buttonText}>Välj bakgrundsbild</Text>
-      </Pressable>
-      <Pressable onPress={() => onSetPage("home")} style={styles.button}>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => onSetPage("home")} style={styles.button}>
         <Text style={styles.buttonText}>Tillbaka</Text>
-      </Pressable>
+      </TouchableHighlight>
     </View>
   );
 };
