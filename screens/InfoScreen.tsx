@@ -12,7 +12,7 @@ export default function InfoScreen() {
   return (
     <ScrollView>
       <DeviceInfo />
-      {/* <LocationInfo /> */}
+      <LocationInfo />
       {/* <MagnetometerInfo /> */}
       {/* <AccelerometerInfo /> */}
       {/* <GyroscopeInfo /> */}
