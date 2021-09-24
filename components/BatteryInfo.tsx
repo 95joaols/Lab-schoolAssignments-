@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import * as Battery from "expo-battery";
 import { BatteryState, Subscription } from "expo-battery";
-
 import { StyleSheet, Text, View } from "react-native";
+import UseObjectState from "../hooks/UseObjectState";
 
 export default function BatteryInfo() {
   const forceUpdate = useForceUpdate();
-  const [powerState, setPowerState] = useState({
+  const [powerState, setPowerState] = UseObjectState({
     batteryLevel: -1,
     batteryState: BatteryState.UNKNOWN,
     lowPowerMode: false,
@@ -20,36 +20,13 @@ export default function BatteryInfo() {
 
     setBatteryStateSubscriptions([
       Battery.addBatteryLevelListener((batteryLevel) => {
-        setPowerState((prev) => {
-          let updating = prev;
-          console.log("batteryLevel", batteryLevel.batteryLevel);
-          updating.batteryLevel = batteryLevel.batteryLevel;
-          forceUpdate();
-          return updating;
-        });
+        setPowerState(batteryLevel);
       }),
       Battery.addBatteryStateListener((batteryState) => {
-        setPowerState((prev) => {
-          console.log(
-            "batteryStatePrev",
-            prev.batteryState,
-            "batteryStateUpdate",
-            batteryState.batteryState
-          );
-          let updating = prev;
-
-          updating.batteryState = batteryState.batteryState;
-          forceUpdate();
-          return updating;
-        });
+        setPowerState(batteryState);
       }),
       Battery.addLowPowerModeListener((lowPowerMode) => {
-        setPowerState((prev) => {
-          let updating = prev;
-          updating.lowPowerMode = lowPowerMode.lowPowerMode;
-          forceUpdate();
-          return updating;
-        });
+        setPowerState(lowPowerMode);
       }),
     ]);
   };
