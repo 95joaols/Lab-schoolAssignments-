@@ -4,7 +4,6 @@ import { Text, View, TouchableHighlight, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
 import { styles } from "../constants/Styles";
 import * as Location from "expo-location";
-import Geolocation from 'react-native-geolocation-service';
 
 interface IGeolocation {
   latitude: number;
