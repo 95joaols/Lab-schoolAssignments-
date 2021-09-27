@@ -54,19 +54,23 @@ function MapScreen({ onGoBack }: Props) {
       }
       let userLocation = await Location.getLastKnownPositionAsync({});
       console.log(userLocation);
+      if (userLocation){
       setLocation(userLocation);
+      };
     })();
   }, []);
 
   const getLocation = () => {
-    let userLatitude = location.coords.latitude;
-    let userLongitude = location.coords.longitude;
-    setRegion({
-      latitude: userLatitude,
-      longitude: userLongitude,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01,
-    })
+    if (location) {
+      let userLatitude = location.coords.latitude;
+      let userLongitude = location.coords.longitude;
+      setRegion({
+        latitude: userLatitude,
+        longitude: userLongitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      })
+    }
   };
 
   return (
