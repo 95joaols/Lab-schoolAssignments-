@@ -9,6 +9,7 @@ import MapScreen from './screens/mapScreen';
 import InfoScreen from './screens/InfoScreen';
 import CameraScreen from './screens/cameraScreen';
 import { styles } from "./constants/Styles";
+import ScreenOrientationProvider from "./contexts/ScreenOrientationContext";
 
 
 export default function App() {
@@ -33,11 +34,13 @@ export default function App() {
 
   return (
     <View style={styles.flex}>
-      <BackgroundImageProvider>
-        <BackgroundImage />
-        <StatusBar style="auto" />
-        {selectedPage()}
-      </BackgroundImageProvider>
+      <ScreenOrientationProvider>
+        <BackgroundImageProvider>
+          <BackgroundImage />
+          <StatusBar style="auto" />
+          {selectedPage()}
+        </BackgroundImageProvider>
+      </ScreenOrientationProvider>
     </View>
   );
 }
