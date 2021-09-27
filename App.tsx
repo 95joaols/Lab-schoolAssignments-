@@ -22,7 +22,7 @@ export default function App() {
       case "background":
         return <BackgroundSelectorScreen onSetPage={setPage} />;
       case "map":
-        return <MapScreen />;
+        return <MapScreen onGoBack={goHome} />;
       case "home":
         return <HomeScreen onSetPage={setPage} />;
     }
@@ -42,5 +42,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
   },
 });
