@@ -4,11 +4,7 @@ import * as ImagePicker from "expo-image-picker";
 import { BackgroundImageContext } from "../contexts/BackgroundImageContext";
 import { styles } from "../constants/Styles";
 
-interface Props {
-  onSetPage: (page: string) => void;
-}
-
-const BackgroundSelectorScreen: FC<Props> = ({ onSetPage }) => {
+const BackgroundSelectorScreen: FC = () => {
   const { setBackgroundImage } = useContext(BackgroundImageContext);
 
   useEffect(() => {
@@ -40,9 +36,6 @@ const BackgroundSelectorScreen: FC<Props> = ({ onSetPage }) => {
     <View style={styles.root}>
       <TouchableHighlight onPress={pickImage} style={styles.button}>
         <Text style={styles.buttonText}>Välj bakgrundsbild</Text>
-      </TouchableHighlight>
-      <TouchableHighlight onPress={() => onSetPage("home")} style={styles.button}>
-        <Text style={styles.buttonText}>Tillbaka</Text>
       </TouchableHighlight>
     </View>
   );

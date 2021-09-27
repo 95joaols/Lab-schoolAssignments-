@@ -1,43 +1,25 @@
-import { StatusBar } from "expo-status-bar";
-import { View } from "react-native";
-import BackgroundImage from "./components/BackgroundImage";
-import BackgroundImageProvider from "./contexts/BackgroundImageContext";
 import BackgroundSelectorScreen from "./screens/BackgroundSelectorScreen";
-import React, { useState } from 'react';
+import React from 'react';
 import HomeScreen from './screens/homeScreen';
 import MapScreen from './screens/mapScreen';
 import InfoScreen from './screens/InfoScreen';
 import CameraScreen from './screens/cameraScreen';
-import { styles } from "./constants/Styles";
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function App() {
-  const [page, setPage] = useState("home");
-
-  const goHome = () => setPage("home");
-
-  const selectedPage = () => {
-    switch (page) {
-      case "camera":
-        return <CameraScreen />;
-      case "info":
-        return <InfoScreen />;
-      case "background":
-        return <BackgroundSelectorScreen onSetPage={setPage} />;
-      case "map":
-        return <MapScreen onGoBack={goHome} />;
-      case "home":
-        return <HomeScreen onSetPage={setPage} />;
-    }
-  };
+  const Stack = createNativeStackNavigator();
 
   return (
-    <View style={styles.flex}>
-      <BackgroundImageProvider>
-        <BackgroundImage />
-        <StatusBar style="auto" />
-        {selectedPage()}
-      </BackgroundImageProvider>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Camera" component={CameraScreen} />
+        <Stack.Screen name="Info" component={InfoScreen} />
+        <Stack.Screen name="Background" component={BackgroundSelectorScreen} />
+        <Stack.Screen name="Map" component={MapScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
