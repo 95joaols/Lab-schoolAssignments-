@@ -54,4 +54,3 @@
 - [Image](https://docs.expo.dev/versions/v42.0.0/react-native/image/)
 
 ### Extern Modul
-

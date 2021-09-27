@@ -20,6 +20,7 @@ interface Props {
 }
 
 function MapScreen ({ onGoBack }: Props) {
+  
   const [location, setLocation] = useState<IGeolocation>({
     latitude: 57.72107,
     longitude: 12.93982,
@@ -45,7 +46,6 @@ function MapScreen ({ onGoBack }: Props) {
       <TouchableHighlight onPress={onGoBack} style={styles.button}>
         <Text style={styles.buttonText}>Tillbaka</Text>
       </TouchableHighlight>
-      <SafeAreaView />
     </View>
   );
 };
