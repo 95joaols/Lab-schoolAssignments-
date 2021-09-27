@@ -2,6 +2,7 @@ import { Camera } from 'expo-camera';
 import { CameraType } from 'expo-camera/build/Camera.types';
 import React, { FC, useEffect, useState } from 'react';
 import { TouchableOpacity, Alert, Button, Text, View, StyleSheet } from 'react-native';
+import { requestPermissionsAsync, createAssetAsync } from 'expo-media-library';
 
 const styles = StyleSheet.create({  
   errorContainer: {  
@@ -37,30 +38,29 @@ const styles = StyleSheet.create({
 
 const CameraScreen: FC = () => {
   const [cameraPermission, setCameraPermission] = useState<boolean | undefined> (undefined);
+  const [libraryPermission, setLibraryPermission] = useState<boolean | undefined>(undefined);
   const [cameraType, setCameraType] = useState<CameraType> (Camera.Constants.Type.front);
   const [cameraReady, setCameraReady] = useState<boolean> (false);
   let camera: Camera | null;
 
-  const statusCameraReady = () => {
-    setCameraReady(true)
-    if(cameraReady)
-      Alert.alert('READY');
-    else
-      Alert.alert('NOT READY');
-  }
-
-  const onError = () => {
-    Alert.alert('ERROR');
-  }
-
-  const takePicture = () => {
+  const takePicture = async () => {
     if (cameraReady) {
-      camera?.takePictureAsync()
-        .then(() => Alert.alert('PIC TAKEN'));
+      const picture = await camera?.takePictureAsync()
+      if (picture && libraryPermission) {
+        await createAssetAsync(picture.uri)
+        Alert.alert('Picture saved to picture album');
+      }
+      else
+        Alert.alert('No permissions!');
     }
-    else
-      Alert.alert('NO PICTURE');
   }
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await requestPermissionsAsync();
+      setLibraryPermission(status === 'granted');
+    })();
+  }, [libraryPermission]);
 
   useEffect(() => {
     (async () => {
@@ -80,7 +80,7 @@ const CameraScreen: FC = () => {
   }
 
   return (
-    <Camera ratio={'16:9'} type={cameraType} ref={(reference) => {camera = reference}} style={styles.camera} useCamera2Api onCameraReady={statusCameraReady} onMountError={onError}>
+    <Camera ratio={'16:9'} type={cameraType} ref={(reference) => {camera = reference}} style={styles.camera} useCamera2Api onCameraReady={() => {setCameraReady(true)}}>
       {cameraType === Camera.Constants.Type.front ? <Text style={styles.text}>Selfie mode</Text> : <Text style={styles.text}>Boring mode</Text>}
       <View style={styles.div}>
         <Button title="Flip" onPress={() => {setCameraType (cameraType === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back)}} />
