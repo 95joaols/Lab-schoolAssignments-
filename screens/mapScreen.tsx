@@ -5,10 +5,11 @@ import {
   Text,
   View,
   Dimensions,
-  Button,
   SafeAreaView,
+  TouchableHighlight,
 } from "react-native";
 import { useState } from "react";
+import { styles } from "../constants/Styles";
 
 interface IGeolocation {
   latitude: number;
@@ -25,9 +26,9 @@ function MapScreen ({ onGoBack }: Props) {
   });
 
   return (
-    <View style={styles.container}>
+    <View style={mapStyles.mapContainer}>
       <MapView
-        style={styles.map}
+        style={mapStyles.map}
         initialRegion={{
           latitude: location.latitude,
           longitude: location.longitude,
@@ -41,16 +42,16 @@ function MapScreen ({ onGoBack }: Props) {
           }}
         />
       </MapView>
-      <View style={styles.buttonsContainer}>
-        <Button title="Go back" onPress={onGoBack} />
-      </View>
+      <TouchableHighlight onPress={onGoBack} style={styles.button}>
+        <Text style={styles.buttonText}>Tillbaka</Text>
+      </TouchableHighlight>
       <SafeAreaView />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
+const mapStyles = StyleSheet.create({
+  mapContainer: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
