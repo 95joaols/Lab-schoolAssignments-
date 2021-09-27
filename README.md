@@ -40,6 +40,7 @@ Av: Rikard Friberg, Joacim Olsson, Mathias Millberg & Andreas Gunnarsson
 - [MediaLibrary](https://docs.expo.dev/versions/v42.0.0/sdk/media-library/)
 - [Sensors](https://docs.expo.dev/versions/v42.0.0/sdk/sensors/)
 - [StatusBar](https://docs.expo.dev/versions/v42.0.0/sdk/statusbar/)
+- [Location](https://docs.expo.dev/versions/v42.0.0/sdk/location/)
 
 ### React Native
 
