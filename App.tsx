@@ -3,11 +3,13 @@ import { View } from "react-native";
 import BackgroundImage from "./components/BackgroundImage";
 import BackgroundImageProvider from "./contexts/BackgroundImageContext";
 import BackgroundSelectorScreen from "./screens/BackgroundSelectorScreen";
-import React, { useState } from "react";
-import HomeScreen from "./screens/homeScreen";
-import MapScreen from "./screens/mapScreen";
+import React, { useState } from 'react';
+import HomeScreen from './screens/homeScreen';
+import MapScreen from './screens/mapScreen';
+import InfoScreen from './screens/InfoScreen';
+import CameraScreen from './screens/cameraScreen';
 import { styles } from "./constants/Styles";
-import InfoScreen from "./screens/InfoScreen";
+
 
 export default function App() {
   const [page, setPage] = useState("home");
@@ -17,7 +19,7 @@ export default function App() {
   const selectedPage = () => {
     switch (page) {
       case "camera":
-        return <HomeScreen onSetPage={setPage} />;
+        return <CameraScreen />;
       case "info":
         return <InfoScreen />;
       case "background":
