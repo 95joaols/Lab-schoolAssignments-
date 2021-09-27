@@ -7,7 +7,7 @@ interface ContextValue {
 }
 
 export const BackgroundImageContext = createContext<ContextValue>({
-  backgroundImage: '',
+  backgroundImage: 'https://www.fonewalls.com/wp-content/uploads/Blond-Solid-Color-Background-Wallpaper-for-Mobile-Phone-300x533.png',
   setBackgroundImage: () => {}
 });
 
