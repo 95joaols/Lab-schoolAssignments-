@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     flex: {
         flex: 1
@@ -8,6 +8,14 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
+    buttonsContainer: {
+        flexDirection: "row",
+        justifyContent: "center",
+        bottom: 10,
+        backgroundColor: "transparent",
+        position: 'absolute',
+        width: "100%"
+      },
     button: {
         backgroundColor: "#8E9080",
         padding: 8,
@@ -29,4 +37,8 @@ export const styles = StyleSheet.create({
         resizeMode: "cover",
         zIndex: -1,
     },
+    map: {
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height,
+      },
 });
