@@ -1,6 +1,6 @@
-import React from "react";
-import { View, Text, TouchableHighlight } from "react-native";
-import { styles } from "../constants/Styles";
+import React from 'react';
+import { View, Text, TouchableHighlight } from 'react-native';
+import { styles } from '../constants/Styles';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
 interface Props {
