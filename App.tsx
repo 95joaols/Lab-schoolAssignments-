@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import BackgroundImage from "./components/BackgroundImage";
 import BackgroundImageProvider from "./contexts/BackgroundImageContext";
 import BackgroundSelectorScreen from "./screens/BackgroundSelectorScreen";
@@ -8,6 +8,7 @@ import HomeScreen from './screens/homeScreen';
 import MapScreen from './screens/mapScreen';
 import InfoScreen from './screens/InfoScreen';
 import CameraScreen from './screens/cameraScreen';
+import { styles } from "./constants/Styles";
 
 
 export default function App() {
@@ -31,7 +32,7 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.flex}>
       <BackgroundImageProvider>
         <BackgroundImage />
         <StatusBar style="auto" />
@@ -40,10 +41,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-  },
-});
