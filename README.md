@@ -43,6 +43,7 @@
 
 ### React Native
 
+- [Alert](https://docs.expo.dev/versions/v42.0.0/react-native/alert/)
 - [Button](https://docs.expo.dev/versions/v42.0.0/react-native/button/)
 - [Dimensions](https://docs.expo.dev/versions/v42.0.0/react-native/dimensions/)
 - [ScrollView](https://docs.expo.dev/versions/v42.0.0/react-native/scrollview/)
@@ -54,11 +55,3 @@
 
 ### Extern Modul
 
-- [Alert](https://reactnative.dev/docs/alert)
-- [Button](https://reactnative.dev/docs/button)
-- [Dimensions](https://reactnative.dev/docs/dimensions)
-- [ScrollView](https://reactnative.dev/docs/scrollview)
-- [StyleSheet](https://reactnative.dev/docs/stylesheet)
-- [Text](https://reactnative.dev/docs/text)
-- [TouchableOpacity](https://reactnative.dev/docs/touchableopacity)
-- [View](https://reactnative.dev/docs/view)
