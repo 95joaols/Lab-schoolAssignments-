@@ -2,7 +2,7 @@
 
 ## Inlämning 1 Apputveckling 2021
 
-### Av: Rikard Friberg, Joacim Olsson, Mathias Millberg & Andreas Gunnarsson
+Av: Rikard Friberg, Joacim Olsson, Mathias Millberg & Andreas Gunnarsson
 
 ## Beskrivning Av Projektet
 
