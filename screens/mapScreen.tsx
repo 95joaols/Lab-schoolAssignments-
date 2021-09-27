@@ -5,10 +5,6 @@ import { useEffect, useState } from "react";
 import { styles } from "../constants/Styles";
 import * as Location from "expo-location";
 
-interface IGeolocation {
-  latitude: number;
-  longitude: number;
-}
 interface Props {
   onGoBack: () => void;
 }
@@ -36,7 +32,6 @@ function MapScreen({ onGoBack }: Props) {
         );
       }
       let userLocation = await Location.getLastKnownPositionAsync({});
-      console.log(userLocation);
       if (userLocation){
       setLocation(userLocation);
       };
