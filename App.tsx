@@ -8,6 +8,7 @@ import HomeScreen from "./screens/homeScreen";
 import MapScreen from "./screens/mapScreen";
 import { styles } from "./constants/Styles";
 import InfoScreen from "./screens/InfoScreen";
+import ScreenOrientationProvider from "./contexts/ScreenOrientationContext";
 
 export default function App() {
   const [page, setPage] = useState("home");
@@ -31,11 +32,13 @@ export default function App() {
 
   return (
     <View style={styles.flex}>
-      <BackgroundImageProvider>
-        <BackgroundImage />
-        <StatusBar style="auto" />
-        {selectedPage()}
-      </BackgroundImageProvider>
+      <ScreenOrientationProvider>
+        <BackgroundImageProvider>
+          <BackgroundImage />
+          <StatusBar style="auto" />
+          {selectedPage()}
+        </BackgroundImageProvider>
+      </ScreenOrientationProvider>
     </View>
   );
 }

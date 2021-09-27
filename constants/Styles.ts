@@ -3,6 +3,13 @@ export const styles = StyleSheet.create({
     flex: {
         flex: 1
     },
+    subView: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: "50%",
+        paddingLeft: 8,
+        paddingRight: 8
+    },
     root: {
         flex: 1,
         justifyContent: "center",
@@ -13,7 +20,7 @@ export const styles = StyleSheet.create({
         padding: 8,
         margin: 8,
         borderRadius: 20,
-        width: "50%"
+        width: "100%"
     },
     buttonText: {
         textAlign: "center",
