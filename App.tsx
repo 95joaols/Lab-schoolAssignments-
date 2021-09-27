@@ -6,24 +6,29 @@ import BackgroundSelectorScreen from "./screens/BackgroundSelectorScreen";
 import React, { useState } from 'react';
 import HomeScreen from './screens/homeScreen';
 import MapScreen from './screens/mapScreen';
+import InfoScreen from './screens/InfoScreen';
 import CameraScreen from './screens/cameraScreen';
 
 
 export default function App() {
+  const [page, setPage] = useState("home");
 
-  const [page, setPage] = useState('home');
-
-  const goHome = () => setPage('home');
+  const goHome = () => setPage("home");
 
   const selectedPage = () => {
     switch (page) {
-      case 'camera': return <CameraScreen />;
-      case 'info': return <HomeScreen onSetPage={setPage} />;
-      case 'background': return <BackgroundSelectorScreen onSetPage={setPage} />;
-      case 'map': return <MapScreen />;
-      case 'home': return <HomeScreen onSetPage={setPage} />;
+      case "camera":
+        return <CameraScreen />;
+      case "info":
+        return <InfoScreen />;
+      case "background":
+        return <BackgroundSelectorScreen onSetPage={setPage} />;
+      case "map":
+        return <MapScreen onGoBack={goHome} />;
+      case "home":
+        return <HomeScreen onSetPage={setPage} />;
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -32,7 +37,6 @@ export default function App() {
         <StatusBar style="auto" />
         {selectedPage()}
       </BackgroundImageProvider>
-
     </View>
   );
 }
@@ -40,5 +44,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
   },
 });
