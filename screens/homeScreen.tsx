@@ -7,6 +7,7 @@ interface Props {
 }
 
 function HomeScreen({ onSetPage }: Props) {
+
   return (
     <View style={styles.root}>
       <TouchableHighlight onPress={() => onSetPage("camera")} style={styles.button}>

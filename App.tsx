@@ -23,7 +23,7 @@ export default function App() {
       case "background":
         return <BackgroundSelectorScreen onSetPage={setPage} />;
       case "map":
-        return <MapScreen />;
+        return <MapScreen onGoBack={goHome} />;
       case "home":
         return <HomeScreen onSetPage={setPage} />;
     }
