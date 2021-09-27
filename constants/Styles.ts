@@ -1,19 +1,34 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
 export const styles = StyleSheet.create({
     flex: {
         flex: 1
+    },
+    subView: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: "50%",
+        paddingLeft: 8,
+        paddingRight: 8
     },
     root: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center"
     },
+    buttonsContainer: {
+        alignItems: "center",
+        bottom: 10,
+        backgroundColor: "transparent",
+        position: 'absolute',
+        width: "100%"
+      },
     button: {
         backgroundColor: "#8E9080",
         padding: 8,
         margin: 8,
         borderRadius: 20,
-        width: "50%"
+        width: "100%"
     },
     buttonText: {
         textAlign: "center",
@@ -29,4 +44,8 @@ export const styles = StyleSheet.create({
         resizeMode: "cover",
         zIndex: -1,
     },
+    map: {
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height,
+      },
 });

@@ -5,7 +5,6 @@ import { BackgroundImageContext } from "../contexts/BackgroundImageContext";
 
 const BackgroundImage: FC = () => {
   const { backgroundImage } = useContext(BackgroundImageContext);
-  console.log('backgroundimage');
 
   return (
     <Image source={{ uri: backgroundImage }} style={styles.backgroundImage} />
