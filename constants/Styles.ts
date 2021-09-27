@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
+
 export const styles = StyleSheet.create({
     flex: {
         flex: 1
@@ -9,8 +10,7 @@ export const styles = StyleSheet.create({
         alignItems: "center"
     },
     buttonsContainer: {
-        flexDirection: "row",
-        justifyContent: "center",
+        alignItems: "center",
         bottom: 10,
         backgroundColor: "transparent",
         position: 'absolute',
