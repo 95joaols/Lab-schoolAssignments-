@@ -2,7 +2,7 @@
 
 ## Inlämning 1 Apputveckling 2021
 
-### Av: Rikard Friberg, Joacim Olsson, Mathias Millberg & Andreas Gunnarsson
+Av: Rikard Friberg, Joacim Olsson, Mathias Millberg & Andreas Gunnarsson
 
 ## Beskrivning Av Projektet
 
@@ -22,7 +22,7 @@
 ### Krav För Väl Godkänt
 
 1. Alla punkter för godkänt är uppfyllda ***[JA]***
-2. React Navigation används för att skapa en bättre upplevelse i appen. ***[JA]***
+2. React Navigation används för att skapa en bättre upplevelse i appen. ***[NEJ]***
 3. Ytterligare en valfri extern modul används i projektet. ***[NEJ]***
 4. Prototyper för applikation tas fram innan den implementeras. Bilder på prototypen skall finnas i projektet vid inlämning. ***[JA]***
 
@@ -54,4 +54,3 @@
 - [Image](https://docs.expo.dev/versions/v42.0.0/react-native/image/)
 
 ### Extern Modul
-
