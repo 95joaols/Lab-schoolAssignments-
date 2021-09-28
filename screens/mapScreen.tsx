@@ -1,6 +1,6 @@
 import * as React from "react";
 import MapView, { Callout, Marker } from "react-native-maps";
-import { Text, View, TouchableHighlight, StyleSheet } from "react-native";
+import { Text, View, TouchableHighlight } from "react-native";
 import { useEffect, useState } from "react";
 import { styles } from "../constants/Styles";
 import * as Location from "expo-location";
@@ -10,7 +10,6 @@ function MapScreen() {
 
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [status, setStatus] = useState<string | null>(null);
   const [region, setRegion] = useState({
     latitude: 57.72107,
     longitude: 12.93982,
@@ -21,7 +20,6 @@ function MapScreen() {
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      setStatus(status);
       if (status !== "granted") {
         setErrorMsg("Disabled, No Permission");
         return;
