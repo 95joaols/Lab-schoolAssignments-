@@ -8,6 +8,12 @@ Av: Rikard Friberg, Joacim Olsson, Mathias Millberg & Andreas Gunnarsson
 
 ## Info Om Hur Projektet Bygg & Körs
 
+För att bygga projektet, kör:
+> `npm install`
+
+För att starta projektet, kör:
+> `npm start`
+
 ## Uppfyllda Krav
 
 ### Krav För Godkänt
