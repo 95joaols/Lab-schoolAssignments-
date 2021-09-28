@@ -17,11 +17,10 @@ export const styles = StyleSheet.create({
         alignItems: "center"
     },
     buttonsContainer: {
-        alignItems: "center",
         bottom: 10,
         backgroundColor: "transparent",
         position: 'absolute',
-        width: "100%"
+        width: "50%"
       },
     button: {
         backgroundColor: "#8E9080",

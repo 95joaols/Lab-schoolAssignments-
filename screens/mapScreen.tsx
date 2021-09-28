@@ -8,7 +8,9 @@ import * as Location from "expo-location";
 
 function MapScreen() {
 
-  const [location, setLocation] = useState<Location.LocationObject>();
+  const [location, setLocation] = useState<Location.LocationObject | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [status, setStatus] = useState<string | null>(null);
   const [region, setRegion] = useState({
     latitude: 57.72107,
     longitude: 12.93982,
@@ -19,23 +21,28 @@ function MapScreen() {
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
+      setStatus(status);
       if (status !== "granted") {
-        return (
-          <View style={mapStyles.errorContainer}>
-            <Text style={{ color: "red" }}>
-              Error: Needs permission to access Location
-            </Text>
-          </View>
-        );
+        setErrorMsg("Disabled, No Permission");
+        return;
       }
       let userLocation = await Location.getLastKnownPositionAsync({});
       if (userLocation){
       setLocation(userLocation);
+      } else if (!userLocation) {
+        setErrorMsg("Location Not Available")      
       };
     })();
   }, []);
 
-  const getLocation = () => {
+  let text = "Waiting..";
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = "Se Din Position";
+  }
+
+  const getLocation = () => {    
     if (location) {
       let userLatitude = location.coords.latitude;
       let userLongitude = location.coords.longitude;
@@ -44,12 +51,12 @@ function MapScreen() {
         longitude: userLongitude,
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
-      })
-    }
+      });
+    };
   };
 
   return (
-    <View style={styles.flex}>
+    <View style={styles.root}>
       <MapView
         style={styles.map}
         region={region}
@@ -63,21 +70,11 @@ function MapScreen() {
       </MapView>
       <Callout style={styles.buttonsContainer}>
         <TouchableHighlight onPress={getLocation} style={styles.button}>
-          <Text style={styles.buttonText}>Hitta Position</Text>
+          <Text style={styles.buttonText}>{text}</Text>
         </TouchableHighlight>
       </Callout>
     </View>
   );
 }
-
-const mapStyles = StyleSheet.create({
-  errorContainer: {
-    flex: 1,
-    backgroundColor: "#ffffff",
-    justifyContent: "center",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-});
 
 export default MapScreen;
