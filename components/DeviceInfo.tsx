@@ -1,6 +1,7 @@
 import React from "react";
 import { Platform, Text, View, StyleSheet } from "react-native";
 import * as Device from "expo-device";
+import { styles } from "../constants/SensorsStyles";
 
 export default function DeviceInfo() {
   return (
@@ -27,21 +28,3 @@ export default function DeviceInfo() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "center",
-    paddingLeft: 20,
-    paddingTop: 15,
-  },
-  title: {
-    fontSize: 20,
-    textAlign: "left",
-  },
-  paragraph: {
-    fontSize: 18,
-    textAlign: "left",
-  },
-});

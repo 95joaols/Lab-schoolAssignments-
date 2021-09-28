@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { Barometer, BarometerMeasurement } from "expo-sensors";
 import { Subscription } from "expo-sensors/build/Pedometer";
+import { styles } from "../../constants/SensorsStyles";
 
 export default function BarometerInfo() {
   const [data, setData] = useState<BarometerMeasurement>({
@@ -61,21 +62,3 @@ function round(n: number) {
   }
   return Math.abs(Math.floor(n * 100) / 100);
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "center",
-    paddingLeft: 20,
-    paddingTop: 15,
-  },
-  title: {
-    fontSize: 20,
-    textAlign: "left",
-  },
-  paragraph: {
-    fontSize: 18,
-    textAlign: "left",
-  },
-});

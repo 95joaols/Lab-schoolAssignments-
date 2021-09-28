@@ -1,5 +1,6 @@
 import React from "react";
 import { ScrollView } from "react-native";
+import BatteryInfo from "../components/BatteryInfo";
 import DeviceInfo from "../components/DeviceInfo";
 import AccelerometerInfo from "../components/sensors/AccelerometerInfo";
 import BarometerInfo from "../components/sensors/BarometerInfo";
@@ -12,6 +13,7 @@ export default function InfoScreen() {
   return (
     <ScrollView>
       <DeviceInfo />
+      <BatteryInfo/>
       <LocationInfo />
       <MagnetometerInfo />
       <AccelerometerInfo />

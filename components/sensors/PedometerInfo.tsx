@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Platform, StyleSheet, Text, View } from "react-native";
 import { Subscription } from "expo-sensors/build/Pedometer";
 import { Pedometer } from "expo-sensors";
+import { styles } from "../../constants/SensorsStyles";
 
 export default function PedometerInfo() {
   const [subscription, setSubscription] = useState<Subscription | null>(null);
@@ -30,7 +31,6 @@ export default function PedometerInfo() {
     Pedometer.isAvailableAsync().then(
       (result) => {
         setIsPedometerAvailable({ isPedometerAvailable: String(result) });
-        console.log("setIsPedometerAvailable", result);
       },
       (error) => {
         setIsPedometerAvailable({
@@ -63,7 +63,7 @@ export default function PedometerInfo() {
     <View style={styles.container}>
       <Text style={styles.title}>PedometerInfo:</Text>
       <Text style={styles.paragraph}>
-        Pedometer.isAvailableAsync():{" "}
+        isAvailable:{" "}
         {isPedometerAvailable.isPedometerAvailable}
       </Text>
       {Platform.OS === "ios" && (
@@ -77,21 +77,3 @@ export default function PedometerInfo() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "center",
-    paddingLeft: 20,
-    paddingTop: 15,
-  },
-  title: {
-    fontSize: 20,
-    textAlign: "left",
-  },
-  paragraph: {
-    fontSize: 18,
-    textAlign: "left",
-  },
-});

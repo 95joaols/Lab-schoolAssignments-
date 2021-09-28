@@ -3,6 +3,7 @@ import * as Battery from "expo-battery";
 import { BatteryState, Subscription } from "expo-battery";
 import { StyleSheet, Text, View } from "react-native";
 import UseObjectState from "../hooks/UseObjectState";
+import { styles } from "../constants/SensorsStyles";
 
 export default function BatteryInfo() {
   const forceUpdate = useForceUpdate();
@@ -77,21 +78,3 @@ function round(n: number) {
   }
   return Math.abs(Math.floor(n * 100) / 100);
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "center",
-    paddingLeft: 20,
-    paddingTop: 15,
-  },
-  title: {
-    fontSize: 20,
-    textAlign: "left",
-  },
-  paragraph: {
-    fontSize: 18,
-    textAlign: "left",
-  },
-});
