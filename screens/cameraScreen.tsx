@@ -52,7 +52,6 @@ const CameraScreen: FC = () => {
 
   return (
     <Camera ratio={'16:9'} zoom={cameraZoom} type={cameraType} ref={(reference) => {camera = reference}} style={styles.camera} useCamera2Api onCameraReady={() => {setCameraReady(true)}}>
-      {console.log('zoom: ', cameraZoom)}
       <View style={styles.sliderDiv}>
         <Slider
           onSlidingComplete={(f) => {setCameraZoom(f)}}
