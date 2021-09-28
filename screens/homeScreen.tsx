@@ -1,16 +1,16 @@
 import { Orientation } from "expo-screen-orientation";
 import React, { useContext } from "react";
-import { View, Text, TouchableHighlight } from "react-native";
-import { styles } from "../constants/Styles";
+import { View, Text, TouchableHighlight } from 'react-native';
+import { styles } from '../constants/Styles';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { ScreenOrientationContext } from "../contexts/ScreenOrientationContext";
 
 interface Props {
-  onSetPage: (page: string) => void;
+  navigation: NavigationProp<ParamListBase>;
 }
 
-function HomeScreen({ onSetPage }: Props) {
+function HomeScreen({ navigation }: Props) {
   const { screenOrientation } = useContext(ScreenOrientationContext);
-
   return (
     <View
       style={[
@@ -25,30 +25,18 @@ function HomeScreen({ onSetPage }: Props) {
       ]}
     >
       <View style={styles.subView}>
-        <TouchableHighlight
-          onPress={() => onSetPage("camera")}
-          style={styles.button}
-        >
+        <TouchableHighlight onPress={() => navigation.navigate("Camera")} style={styles.button}>
           <Text style={styles.buttonText}>Kamera</Text>
         </TouchableHighlight>
-        <TouchableHighlight
-          onPress={() => onSetPage("info")}
-          style={styles.button}
-        >
+        <TouchableHighlight onPress={() => navigation.navigate("Info")} style={styles.button}>
           <Text style={styles.buttonText}>Info</Text>
         </TouchableHighlight>
       </View>
       <View style={styles.subView}>
-        <TouchableHighlight
-          onPress={() => onSetPage("background")}
-          style={styles.button}
-        >
+        <TouchableHighlight onPress={() => navigation.navigate("Background")} style={styles.button}>
           <Text style={styles.buttonText}>Bakgrundsbild</Text>
         </TouchableHighlight>
-        <TouchableHighlight
-          onPress={() => onSetPage("map")}
-          style={styles.button}
-        >
+        <TouchableHighlight onPress={() => navigation.navigate("Map")} style={styles.button}>
           <Text style={styles.buttonText}>Karta</Text>
         </TouchableHighlight>
       </View>

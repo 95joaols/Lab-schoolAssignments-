@@ -13,9 +13,7 @@ export const BackgroundImageContext = createContext<ContextValue>({
 
 const BackgroundImageProvider: FC = (props) => {
   const [backgroundImage, setBackgroundImage] = useState<string>('https://www.fonewalls.com/wp-content/uploads/Blond-Solid-Color-Background-Wallpaper-for-Mobile-Phone-300x533.png');
-
   
-
   return (
     <BackgroundImageContext.Provider
       value={{

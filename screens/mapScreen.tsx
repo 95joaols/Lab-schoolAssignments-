@@ -5,11 +5,8 @@ import { useEffect, useState } from "react";
 import { styles } from "../constants/Styles";
 import * as Location from "expo-location";
 
-interface Props {
-  onGoBack: () => void;
-}
 
-function MapScreen({ onGoBack }: Props) {
+function MapScreen() {
 
   const [location, setLocation] = useState<Location.LocationObject>();
   const [region, setRegion] = useState({
@@ -67,9 +64,6 @@ function MapScreen({ onGoBack }: Props) {
       <Callout style={styles.buttonsContainer}>
         <TouchableHighlight onPress={getLocation} style={styles.button}>
           <Text style={styles.buttonText}>Hitta Position</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={onGoBack} style={styles.button}>
-          <Text style={styles.buttonText}>Tillbaka</Text>
         </TouchableHighlight>
       </Callout>
     </View>

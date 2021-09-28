@@ -6,11 +6,7 @@ import { styles } from "../constants/Styles";
 import { ScreenOrientationContext } from "../contexts/ScreenOrientationContext";
 import { Orientation } from "expo-screen-orientation";
 
-interface Props {
-  onSetPage: (page: string) => void;
-}
-
-const BackgroundSelectorScreen: FC<Props> = ({ onSetPage }) => {
+const BackgroundSelectorScreen: FC = () => {
   const { setBackgroundImage } = useContext(BackgroundImageContext);
   const { screenOrientation } = useContext(ScreenOrientationContext);
 
@@ -55,14 +51,6 @@ const BackgroundSelectorScreen: FC<Props> = ({ onSetPage }) => {
       <View style={styles.subView}>
         <TouchableHighlight onPress={pickImage} style={styles.button}>
           <Text style={styles.buttonText}>Välj bakgrundsbild</Text>
-        </TouchableHighlight>
-      </View>
-      <View style={styles.subView}>
-        <TouchableHighlight
-          onPress={() => onSetPage("home")}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Tillbaka</Text>
         </TouchableHighlight>
       </View>
     </View>

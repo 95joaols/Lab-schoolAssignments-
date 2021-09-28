@@ -22,7 +22,7 @@ Av: Rikard Friberg, Joacim Olsson, Mathias Millberg & Andreas Gunnarsson
 ### Krav För Väl Godkänt
 
 1. Alla punkter för godkänt är uppfyllda ***[JA]***
-2. React Navigation används för att skapa en bättre upplevelse i appen. ***[NEJ]***
+2. React Navigation används för att skapa en bättre upplevelse i appen. ***[JA]***
 3. Ytterligare en valfri extern modul används i projektet. ***[NEJ]***
 4. Prototyper för applikation tas fram innan den implementeras. Bilder på prototypen skall finnas i projektet vid inlämning. ***[JA]***
 
