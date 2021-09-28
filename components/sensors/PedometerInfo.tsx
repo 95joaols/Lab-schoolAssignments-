@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Pedometer } from "expo-sensors";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import { Subscription } from "expo-sensors/build/Pedometer";
+import { Pedometer } from "expo-sensors";
 
 export default function PedometerInfo() {
   const [subscription, setSubscription] = useState<Subscription | null>(null);
@@ -26,40 +26,54 @@ export default function PedometerInfo() {
     subscription && subscription.remove();
     setSubscription(null);
   };
-
-  Pedometer.isAvailableAsync().then(
-    (result) => {
-      setIsPedometerAvailable({ isPedometerAvailable: String(result) });
-    },
-    (error) => {
-      setIsPedometerAvailable({
-        isPedometerAvailable: "Could not get isPedometerAvailable: " + error,
-      });
-    }
-  );
-
-  const end = new Date();
-  const start = new Date();
-  start.setDate(end.getDate() - 1);
-  Pedometer.getStepCountAsync(start, end).then(
-    (result) => {
-      setPastStepCount(result);
-    },
-    (error) => {
-      setPastStepCount({ steps: -1 });
-    }
-  );
-
   useEffect(() => {
-    subscribe();
-    return () => unsubscribe();
+    Pedometer.isAvailableAsync().then(
+      (result) => {
+        setIsPedometerAvailable({ isPedometerAvailable: String(result) });
+        console.log("setIsPedometerAvailable", result);
+      },
+      (error) => {
+        setIsPedometerAvailable({
+          isPedometerAvailable: "Could not get isPedometerAvailable: " + error,
+        });
+      }
+    );
   }, []);
+  useEffect(() => {
+    const end = new Date();
+    const start = new Date();
+    start.setDate(end.getDate() - 1);
+    Pedometer.getStepCountAsync(start, end)
+      .then(
+        (result) => {
+          setPastStepCount(result);
+        },
+        (error) => {
+          setPastStepCount({ steps: -1 });
+        }
+      )
+      .catch((error) => {});
+  }, [isPedometerAvailable]),
+    useEffect(() => {
+      subscribe();
+      return () => unsubscribe();
+    }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Pedometer.isAvailableAsync(): {isPedometerAvailable}</Text>
-      <Text>Steps taken in the last 24 hours: {pastStepCount}</Text>
-      <Text>Walk! And watch this go up: {currentStepCount}</Text>
+      <Text style={styles.title}>PedometerInfo:</Text>
+      <Text style={styles.paragraph}>
+        Pedometer.isAvailableAsync():{" "}
+        {isPedometerAvailable.isPedometerAvailable}
+      </Text>
+      {Platform.OS === "ios" && (
+        <Text style={styles.paragraph}>
+          Steps taken in the last 24 hours: {pastStepCount.steps}
+        </Text>
+      )}
+      <Text style={styles.paragraph}>
+        Walk! And watch this go up: {currentStepCount.steps}
+      </Text>
     </View>
   );
 }
@@ -67,8 +81,17 @@ export default function PedometerInfo() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 15,
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
+    paddingLeft: 20,
+    paddingTop: 15,
+  },
+  title: {
+    fontSize: 20,
+    textAlign: "left",
+  },
+  paragraph: {
+    fontSize: 18,
+    textAlign: "left",
   },
 });

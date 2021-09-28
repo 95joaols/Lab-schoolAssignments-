@@ -61,10 +61,12 @@ export default function BatteryInfo() {
   const { batteryLevel, batteryState, lowPowerMode } = powerState;
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>PowerState:</Text>
-      <Text style={styles.text}>batteryLevel: {round(batteryLevel * 100)}</Text>
-      <Text style={styles.text}>batteryState: {batteryState}</Text>
-      <Text style={styles.text}>lowPowerMode: {String(lowPowerMode)}</Text>
+      <Text style={styles.title}>PowerState:</Text>
+      <Text style={styles.paragraph}>
+        batteryLevel: {round(batteryLevel * 100)}
+      </Text>
+      <Text style={styles.paragraph}>batteryState: {batteryState}</Text>
+      <Text style={styles.paragraph}>lowPowerMode: {String(lowPowerMode)}</Text>
     </View>
   );
 }
@@ -79,10 +81,17 @@ function round(n: number) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: "flex-start",
     justifyContent: "center",
-    paddingHorizontal: 10,
+    paddingLeft: 20,
+    paddingTop: 15,
   },
-  text: {
-    textAlign: "center",
+  title: {
+    fontSize: 20,
+    textAlign: "left",
+  },
+  paragraph: {
+    fontSize: 18,
+    textAlign: "left",
   },
 });

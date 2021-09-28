@@ -7,6 +7,7 @@ import { LocationObject } from "expo-location";
 export default function LocationInfo() {
   const [location, setLocation] = useState<LocationObject | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [status, setStatus] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -17,6 +18,7 @@ export default function LocationInfo() {
         return;
       }
       let { status } = await Location.requestForegroundPermissionsAsync();
+      setStatus(status);
       if (status !== "granted") {
         setErrorMsg("Permission to access location was denied");
         return;
@@ -37,6 +39,8 @@ export default function LocationInfo() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Location:</Text>
+      <Text style={styles.paragraph}>Permissions:{status}</Text>
+
       <Text style={styles.paragraph}>{text}</Text>
     </View>
   );
@@ -48,6 +52,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "center",
     paddingLeft: 20,
+    paddingTop: 15,
   },
   title: {
     fontSize: 20,

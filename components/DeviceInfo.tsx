@@ -6,7 +6,7 @@ export default function DeviceInfo() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>DeviceInfo:</Text>
-      <Text style={styles.paragraph}>IsDevice: {Device.isDevice} </Text>
+      <Text style={styles.paragraph}>IsDevice: {String(Device.isDevice)} </Text>
       <Text style={styles.paragraph}>brand: {Device.brand} </Text>
       <Text style={styles.paragraph}>manufacturer: {Device.manufacturer} </Text>
       <Text style={styles.paragraph}>modelName: {Device.modelName} </Text>
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "flex-start",
     justifyContent: "center",
-    padding: 20,
+    paddingLeft: 20,
+    paddingTop: 15,
   },
   title: {
     fontSize: 20,
