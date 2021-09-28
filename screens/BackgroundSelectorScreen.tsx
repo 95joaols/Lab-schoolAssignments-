@@ -1,16 +1,14 @@
 import React, { FC, useContext, useEffect } from "react";
-import { Button, Platform, View, StyleSheet } from "react-native";
+import { Platform, View, Text, TouchableHighlight } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { BackgroundImageContext } from "../contexts/BackgroundImageContext";
+import { styles } from "../constants/Styles";
+import { ScreenOrientationContext } from "../contexts/ScreenOrientationContext";
+import { Orientation } from "expo-screen-orientation";
 
-interface Props {
-    onSetPage: (page: string) => void;
-}
-
-const BackgroundSelectorScreen: FC<Props> = ({onSetPage}) => {
-  const { setBackgroundImage } = useContext(
-    BackgroundImageContext
-  );
+const BackgroundSelectorScreen: FC = () => {
+  const { setBackgroundImage } = useContext(BackgroundImageContext);
+  const { screenOrientation } = useContext(ScreenOrientationContext);
 
   useEffect(() => {
     (async () => {
@@ -38,19 +36,25 @@ const BackgroundSelectorScreen: FC<Props> = ({onSetPage}) => {
   };
 
   return (
-    <View style={styles.root}>
-      <Button title="Välj bakgrundsbild" onPress={pickImage} />
-      <Button title="Tillbaka" onPress={() => onSetPage("home")} />
+    <View
+      style={[
+        styles.root,
+        {
+          flexDirection:
+            screenOrientation === Orientation.LANDSCAPE_RIGHT ||
+            screenOrientation === Orientation.LANDSCAPE_LEFT
+              ? "row"
+              : "column",
+        },
+      ]}
+    >
+      <View style={styles.subView}>
+        <TouchableHighlight onPress={pickImage} style={styles.button}>
+          <Text style={styles.buttonText}>Välj bakgrundsbild</Text>
+        </TouchableHighlight>
+      </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-    root: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center"
-    }
-})
 
 export default BackgroundSelectorScreen;
