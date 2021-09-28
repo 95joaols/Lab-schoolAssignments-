@@ -4,6 +4,7 @@ import BatteryInfo from "../components/BatteryInfo";
 import DeviceInfo from "../components/DeviceInfo";
 import AccelerometerInfo from "../components/sensors/AccelerometerInfo";
 import BarometerInfo from "../components/sensors/BarometerInfo";
+import DeviceMotionInfo from "../components/sensors/DeviceMotionInfo";
 import GyroscopeInfo from "../components/sensors/GyroscopeInfo";
 import LocationInfo from "../components/sensors/locationInfo";
 import MagnetometerInfo from "../components/sensors/MagnetometerInfo";
@@ -13,7 +14,8 @@ export default function InfoScreen() {
   return (
     <ScrollView>
       <DeviceInfo />
-      <BatteryInfo/>
+      <BatteryInfo />
+      <DeviceMotionInfo />
       <LocationInfo />
       <MagnetometerInfo />
       <AccelerometerInfo />
