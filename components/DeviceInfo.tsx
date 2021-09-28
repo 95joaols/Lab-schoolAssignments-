@@ -1,14 +1,13 @@
 import React from "react";
 import { Platform, Text, View, StyleSheet } from "react-native";
 import * as Device from "expo-device";
+import { styles } from "../constants/SensorsStyles";
 
 export default function DeviceInfo() {
-  console.log("Device", Device);
-
   return (
     <View style={styles.container}>
-      <Text style={styles.Rubrik}>DeviceInfo:</Text>
-      <Text style={styles.paragraph}>IsDevice: {Device.isDevice} </Text>
+      <Text style={styles.title}>DeviceInfo:</Text>
+      <Text style={styles.paragraph}>IsDevice: {String(Device.isDevice)} </Text>
       <Text style={styles.paragraph}>brand: {Device.brand} </Text>
       <Text style={styles.paragraph}>manufacturer: {Device.manufacturer} </Text>
       <Text style={styles.paragraph}>modelName: {Device.modelName} </Text>
@@ -29,20 +28,3 @@ export default function DeviceInfo() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "center",
-    padding: 20,
-  },
-  Rubrik: {
-    fontSize: 20,
-    textAlign: "left",
-  },
-  paragraph: {
-    fontSize: 18,
-    textAlign: "left",
-  },
-});
