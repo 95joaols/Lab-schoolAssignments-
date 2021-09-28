@@ -36,7 +36,6 @@ Av: Rikard Friberg, Joacim Olsson, Mathias Millberg & Andreas Gunnarsson
 - [Camera](https://docs.expo.dev/versions/v42.0.0/sdk/camera/)
 - [Device](https://docs.expo.dev/versions/v42.0.0/sdk/device/)
 - [ImagePicker](https://docs.expo.dev/versions/v42.0.0/sdk/imagepicker/)
-- [MapView](https://docs.expo.dev/versions/v42.0.0/sdk/map-view/)
 - [MediaLibrary](https://docs.expo.dev/versions/v42.0.0/sdk/media-library/)
 - [Sensors](https://docs.expo.dev/versions/v42.0.0/sdk/sensors/)
 - [StatusBar](https://docs.expo.dev/versions/v42.0.0/sdk/statusbar/)
