@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from "react";
 import * as Battery from "expo-battery";
 import { BatteryState, Subscription } from "expo-battery";
-import { StyleSheet, Text, View } from "react-native";
-import UseObjectState from "../hooks/UseObjectState";
+import React, { useCallback, useEffect, useState } from "react";
+import { Text, View } from "react-native";
 import { styles } from "../constants/SensorsStyles";
+import UseObjectState from "../hooks/UseObjectState";
 
 export default function BatteryInfo() {
-  const forceUpdate = useForceUpdate();
   const [powerState, setPowerState] = UseObjectState({
     batteryLevel: -1,
     batteryState: BatteryState.UNKNOWN,
     lowPowerMode: false,
   });
   const [batteryStateSubscriptions, setBatteryStateSubscriptions] = useState<
-    Subscription[] | null
-  >(null);
+    Subscription[]
+  >();
 
-  const subscribe = () => {
+  const subscribe = useCallback(() => {
     Battery.getPowerStateAsync().then((State) => setPowerState(State));
 
     setBatteryStateSubscriptions([
@@ -30,9 +29,9 @@ export default function BatteryInfo() {
         setPowerState(lowPowerMode);
       }),
     ]);
-  };
+  }, []);
 
-  const unsubscribe = () => {
+  const unsubscribe = useCallback(() => {
     batteryStateSubscriptions &&
       batteryStateSubscriptions[0] &&
       batteryStateSubscriptions[0].remove();
@@ -45,19 +44,13 @@ export default function BatteryInfo() {
       batteryStateSubscriptions[2] &&
       batteryStateSubscriptions[2].remove();
 
-    setBatteryStateSubscriptions(null);
-  };
-
-  //create your forceUpdate hook
-  function useForceUpdate() {
-    const [value, setValue] = useState(0); // integer state
-    return () => setValue((value) => value + 1); // update the state to force render
-  }
+    setBatteryStateSubscriptions(undefined);
+  }, []);
 
   useEffect(() => {
     subscribe();
     return () => unsubscribe();
-  }, []);
+  }, [subscribe, unsubscribe]);
 
   const { batteryLevel, batteryState, lowPowerMode } = powerState;
   return (

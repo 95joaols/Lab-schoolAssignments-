@@ -1,50 +1,35 @@
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Platform,
-} from "react-native";
+import { PermissionResponse } from "expo-camera";
 import { Barometer, BarometerMeasurement } from "expo-sensors";
-import { Subscription } from "expo-sensors/build/Pedometer";
+import React, { useEffect, useState } from "react";
+import {
+  Platform, Text, View
+} from "react-native";
 import { styles } from "../../constants/SensorsStyles";
 
 export default function BarometerInfo() {
   const [data, setData] = useState<BarometerMeasurement>({
     pressure: 0,
   });
-
-  const [subscription, setSubscription] = useState<Subscription | null>(null);
-
-  useEffect(() => {
-    subscribe();
-  }, []);
+  const [granted, setGranted] = useState<PermissionResponse>()
 
   useEffect(() => {
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-  const subscribe = () => {
-    setSubscription(
+    (async () => {
+      const respond = await Barometer.requestPermissionsAsync()
+      setGranted(respond);
       Barometer.addListener((barometerData) => {
         setData(barometerData);
-      })
-    );
-  };
-
-  const unsubscribe = () => {
-    subscription && subscription.remove();
-    setSubscription(null);
-  };
+      });
+    })();
+    return Barometer.removeAllListeners;
+  }, []);
 
   const { pressure, relativeAltitude } = data;
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Barometer:</Text>
+      <Text style={styles.paragraph}>Permissions:{granted?.status}</Text>
+
       <Text style={styles.paragraph}>Pressure: {round(pressure)} hPa</Text>
       <Text style={styles.paragraph}>
         Relative Altitude:{" "}

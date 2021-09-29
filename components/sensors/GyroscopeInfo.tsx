@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Gyroscope } from "expo-sensors";
-import { Subscription } from "expo-sensors/build/Pedometer";
+import { PermissionResponse } from "expo-sensors/build/Pedometer";
+import React, { useEffect, useState } from "react";
+import { Text, View } from "react-native";
 import { styles } from "../../constants/SensorsStyles";
 
 export default function GyroscopeInfo() {
@@ -10,31 +10,27 @@ export default function GyroscopeInfo() {
     y: 0,
     z: 0,
   });
-  const [subscription, setSubscription] = useState<Subscription | null>(null);
-
-
-  const subscribe = () => {
-    setSubscription(
-      Gyroscope.addListener((gyroscopeData) => {
-        setData(gyroscopeData);
-      })
-    );
-  };
-
-  const unsubscribe = () => {
-    subscription && subscription.remove();
-    setSubscription(null);
-  };
+  const [granted, setGranted] = useState<PermissionResponse>()
 
   useEffect(() => {
-    subscribe();
-    return () => unsubscribe();
+    (async () => {
+      const respond = await Gyroscope.requestPermissionsAsync()
+      setGranted(respond);
+      if (respond.granted) {
+        Gyroscope.addListener((gyroscopeData) => {
+          setData(gyroscopeData);
+        });
+      }
+    })();
+    return Gyroscope.removeAllListeners;
   }, []);
 
   const { x, y, z } = data;
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Gyroscope:</Text>
+      <Text style={styles.paragraph}>Permissions:{granted?.status}</Text>
+
       <Text style={styles.paragraph}>
         x: {round(x)} y: {round(y)} z: {round(z)}
       </Text>
