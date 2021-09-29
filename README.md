@@ -29,7 +29,7 @@ För att starta projektet, kör:
 
 1. Alla punkter för godkänt är uppfyllda ***[JA]***
 2. React Navigation används för att skapa en bättre upplevelse i appen. ***[JA]***
-3. Ytterligare en valfri extern modul används i projektet. ***[NEJ]***
+3. Ytterligare en valfri extern modul används i projektet. ***[JA]***
 4. Prototyper för applikation tas fram innan den implementeras. Bilder på prototypen skall finnas i projektet vid inlämning. ***[JA]***
 
 ## Moduler som används
