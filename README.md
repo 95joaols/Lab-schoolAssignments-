@@ -47,7 +47,6 @@ För att starta projektet, kör:
 - [StatusBar](https://docs.expo.dev/versions/v42.0.0/sdk/statusbar/)
 - [Location](https://docs.expo.dev/versions/v42.0.0/sdk/location/)
 - [ScreenOrientation](https://docs.expo.dev/versions/v42.0.0/sdk/screenorientation/)
-- [Slider](https://docs.expo.dev/versions/v42.0.0/sdk/slider/)
 
 ### React Native
 
@@ -63,3 +62,5 @@ För att starta projektet, kör:
 - [TouchableOpacity](https://docs.expo.dev/versions/v42.0.0/react-native/touchableopacity/)
 
 ### Extern Modul
+
+- [Slider](https://github.com/callstack/react-native-slider)
