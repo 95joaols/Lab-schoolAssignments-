@@ -29,7 +29,7 @@ För att starta projektet, kör:
 
 1. Alla punkter för godkänt är uppfyllda ***[JA]***
 2. React Navigation används för att skapa en bättre upplevelse i appen. ***[JA]***
-3. Ytterligare en valfri extern modul används i projektet. ***[NEJ]***
+3. Ytterligare en valfri extern modul används i projektet. ***[JA]***
 4. Prototyper för applikation tas fram innan den implementeras. Bilder på prototypen skall finnas i projektet vid inlämning. ***[JA]***
 
 ## Moduler som används
@@ -47,7 +47,6 @@ För att starta projektet, kör:
 - [StatusBar](https://docs.expo.dev/versions/v42.0.0/sdk/statusbar/)
 - [Location](https://docs.expo.dev/versions/v42.0.0/sdk/location/)
 - [ScreenOrientation](https://docs.expo.dev/versions/v42.0.0/sdk/screenorientation/)
-- [Slider](https://docs.expo.dev/versions/v42.0.0/sdk/slider/)
 
 ### React Native
 
@@ -63,3 +62,5 @@ För att starta projektet, kör:
 - [TouchableOpacity](https://docs.expo.dev/versions/v42.0.0/react-native/touchableopacity/)
 
 ### Extern Modul
+
+- [Slider](https://github.com/callstack/react-native-slider)
