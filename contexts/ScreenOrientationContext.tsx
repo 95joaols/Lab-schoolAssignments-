@@ -1,4 +1,4 @@
-import { createContext, FC, useState } from "react";
+import { createContext, FC, useEffect, useState } from "react";
 import * as ScreenOrientation from "expo-screen-orientation";
 import React from "react";
 
@@ -15,10 +15,14 @@ const ScreenOrientationProvider: FC = (props) => {
     useState<ScreenOrientation.Orientation>(
       ScreenOrientation.Orientation.PORTRAIT_UP
     );
-  ScreenOrientation.addOrientationChangeListener(async () => {
-    const orientationValue = await ScreenOrientation.getOrientationAsync();
-    setScreenOrientation(orientationValue);
-  });
+  
+  useEffect(() => {
+    ScreenOrientation.addOrientationChangeListener(async () => {
+      const orientationValue = await ScreenOrientation.getOrientationAsync();
+      setScreenOrientation(orientationValue);
+    });
+    return ScreenOrientation.removeOrientationChangeListeners;
+  }, []);
 
   return (
     <ScreenOrientationContext.Provider
