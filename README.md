@@ -8,6 +8,12 @@ Av: Rikard Friberg, Joacim Olsson, Mathias Millberg & Andreas Gunnarsson
 
 ## Info Om Hur Projektet Bygg & Körs
 
+För att bygga projektet, kör:
+> `npm install`
+
+För att starta projektet, kör:
+> `npm start`
+
 ## Uppfyllda Krav
 
 ### Krav För Godkänt
@@ -40,6 +46,8 @@ Av: Rikard Friberg, Joacim Olsson, Mathias Millberg & Andreas Gunnarsson
 - [Sensors](https://docs.expo.dev/versions/v42.0.0/sdk/sensors/)
 - [StatusBar](https://docs.expo.dev/versions/v42.0.0/sdk/statusbar/)
 - [Location](https://docs.expo.dev/versions/v42.0.0/sdk/location/)
+- [ScreenOrientation](https://docs.expo.dev/versions/v42.0.0/sdk/screenorientation/)
+- [Slider](https://docs.expo.dev/versions/v42.0.0/sdk/slider/)
 
 ### React Native
 
@@ -52,5 +60,6 @@ Av: Rikard Friberg, Joacim Olsson, Mathias Millberg & Andreas Gunnarsson
 - [Text](https://docs.expo.dev/versions/v42.0.0/react-native/text/)
 - [StyleSheet](https://docs.expo.dev/versions/v42.0.0/react-native/stylesheet/)
 - [Image](https://docs.expo.dev/versions/v42.0.0/react-native/image/)
+- [TouchableOpacity](https://docs.expo.dev/versions/v42.0.0/react-native/touchableopacity/)
 
 ### Extern Modul
