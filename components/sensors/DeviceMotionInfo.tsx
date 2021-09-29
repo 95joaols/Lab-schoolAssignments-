@@ -1,3 +1,4 @@
+import { PermissionResponse } from "expo-camera";
 import { DeviceMotion, DeviceMotionMeasurement } from "expo-sensors";
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
@@ -6,14 +7,12 @@ import { styles } from "../../constants/SensorsStyles";
 
 export default function DeviceMotionInfo() {
     const [deviceMotion, setDeviceMotion] = useState<DeviceMotionMeasurement | null>(null)
-    const [granted, setGranted] = useState<boolean>(false)
+    const [granted, setGranted] = useState<PermissionResponse | null>(null)
 
     const Setup = (() => {
         (async () => {
-            console.log("Setup");
-
             const respond = await DeviceMotion.requestPermissionsAsync()
-            setGranted(respond.granted);
+            setGranted(respond);
             if (respond.granted) {
                 DeviceMotion.setUpdateInterval(40)
                 DeviceMotion.addListener((device) => { setDeviceMotion(device) })
@@ -35,9 +34,8 @@ export default function DeviceMotionInfo() {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Device Motion:</Text>
-                <Text style={styles.paragraph}>
-                    granted: {String(granted)}
-                </Text>
+                <Text style={styles.paragraph}>Permissions:{granted?.status}</Text>
+
                 <Text style={styles.paragraph}>
                     acceleration:
                 </Text>
@@ -57,13 +55,7 @@ export default function DeviceMotionInfo() {
                     rotation:
                 </Text>
                 <Text style={styles.paragraph}>
-                    X: {round(rotation.alpha)}
-                </Text>
-                <Text style={styles.paragraph}>
-                    y: {round(rotation.beta)}
-                </Text>
-                <Text style={styles.paragraph}>
-                    z: {round(rotation.gamma)}
+                    X: {round(rotation.alpha)} y: {round(rotation.beta)} z: {round(rotation.gamma)}
                 </Text>
             </View>
         )

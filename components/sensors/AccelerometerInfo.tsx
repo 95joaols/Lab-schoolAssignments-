@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { PermissionResponse } from "expo-camera";
 import { Accelerometer } from "expo-sensors";
-import { Subscription } from "expo-sensors/build/Pedometer";
+import React, { useEffect, useState } from "react";
+import { Text, View } from "react-native";
 import { styles } from "../../constants/SensorsStyles";
 
 export default function AccelerometerInfo() {
@@ -10,25 +10,28 @@ export default function AccelerometerInfo() {
     y: 0,
     z: 0,
   });
+  const [granted, setGranted] = useState<PermissionResponse | null>(null)
 
-  const [subscription, setSubscription] = useState<Subscription | null>(null);
 
-  const subscribe = () => {
-    setSubscription(
-      Accelerometer.addListener((accelerometerData) => {
-        setData(accelerometerData);
-      })
-    );
+  const Setup = () => {
+    (async () => {
+      const respond = await Accelerometer.requestPermissionsAsync()
+      setGranted(respond);
+      if (respond.granted) {
+        Accelerometer.addListener((accelerometerData) => {
+          setData(accelerometerData);
+        });
+      }
+    })();
   };
 
-  const unsubscribe = () => {
-    subscription && subscription.remove();
-    setSubscription(null);
+  const Remove = () => {
+    Accelerometer.removeAllListeners();
   };
 
   useEffect(() => {
-    subscribe();
-    return () => unsubscribe();
+    Setup();
+    return () => Remove();
   }, []);
 
   const { x, y, z } = data;
@@ -40,6 +43,8 @@ export default function AccelerometerInfo() {
       <Text style={styles.paragraph}>
         x: {round(x)} y: {round(y)} z: {round(z)}
       </Text>
+      <Text style={styles.paragraph}>Permissions:{granted?.status}</Text>
+
     </View>
   );
 }

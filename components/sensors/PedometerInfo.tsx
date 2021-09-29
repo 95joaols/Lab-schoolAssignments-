@@ -16,14 +16,14 @@ export default function PedometerInfo() {
     steps: 0,
   });
 
-  const subscribe = () => {
+  const Setup = () => {
     setSubscription(
       Pedometer.watchStepCount((result) => {
         setCurrentStepCount(result);
       })
     );
   };
-  const unsubscribe = () => {
+  const Remove = () => {
     subscription && subscription.remove();
     setSubscription(null);
   };
@@ -55,8 +55,8 @@ export default function PedometerInfo() {
       .catch((error) => {});
   }, [isPedometerAvailable]),
     useEffect(() => {
-      subscribe();
-      return () => unsubscribe();
+      Setup();
+      return () => Remove();
     }, []);
 
   return (

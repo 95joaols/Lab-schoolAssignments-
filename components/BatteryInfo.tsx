@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
 import * as Battery from "expo-battery";
 import { BatteryState, Subscription } from "expo-battery";
-import { StyleSheet, Text, View } from "react-native";
-import UseObjectState from "../hooks/UseObjectState";
+import React, { useEffect, useState } from "react";
+import { Text, View } from "react-native";
 import { styles } from "../constants/SensorsStyles";
+import UseObjectState from "../hooks/UseObjectState";
 
 export default function BatteryInfo() {
   const forceUpdate = useForceUpdate();
