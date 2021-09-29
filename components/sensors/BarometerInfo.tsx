@@ -10,20 +10,9 @@ export default function BarometerInfo() {
   const [data, setData] = useState<BarometerMeasurement>({
     pressure: 0,
   });
-  const [granted, setGranted] = useState<PermissionResponse | null>(null)
-
-
-  useEffect(() => {
-    subscribe();
-  }, []);
+  const [granted, setGranted] = useState<PermissionResponse>()
 
   useEffect(() => {
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-  const subscribe = () => {
     (async () => {
       const respond = await Barometer.requestPermissionsAsync()
       setGranted(respond);
@@ -31,11 +20,8 @@ export default function BarometerInfo() {
         setData(barometerData);
       });
     })();
-  };
-
-  const unsubscribe = () => {
-    Barometer.removeAllListeners();
-  };
+    return Barometer.removeAllListeners;
+  }, []);
 
   const { pressure, relativeAltitude } = data;
 

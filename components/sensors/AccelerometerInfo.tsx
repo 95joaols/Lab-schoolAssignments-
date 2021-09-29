@@ -10,10 +10,9 @@ export default function AccelerometerInfo() {
     y: 0,
     z: 0,
   });
-  const [granted, setGranted] = useState<PermissionResponse | null>(null)
+  const [granted, setGranted] = useState<PermissionResponse>()
 
-
-  const Setup = () => {
+  useEffect(() => {
     (async () => {
       const respond = await Accelerometer.requestPermissionsAsync()
       setGranted(respond);
@@ -23,15 +22,7 @@ export default function AccelerometerInfo() {
         });
       }
     })();
-  };
-
-  const Remove = () => {
-    Accelerometer.removeAllListeners();
-  };
-
-  useEffect(() => {
-    Setup();
-    return () => Remove();
+    return Accelerometer.removeAllListeners;
   }, []);
 
   const { x, y, z } = data;

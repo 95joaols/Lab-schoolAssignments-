@@ -2,19 +2,19 @@ import { Subscription } from "@unimodules/react-native-adapter";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
 import { LocationObject, LocationOptions, LocationPermissionResponse } from "expo-location";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Platform, Text, View } from "react-native";
 import { styles } from "../../constants/SensorsStyles";
 
 export default function LocationInfo() {
-  const [location, setLocation] = useState<LocationObject | null>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [grantedForeground, setGrantedForeground] = useState<LocationPermissionResponse | null>(null)
-  const [grantedBackground, setGrantedBackground] = useState<LocationPermissionResponse | null>(null)
+  const [location, setLocation] = useState<LocationObject>();
+  const [errorMsg, setErrorMsg] = useState<string>();
+  const [grantedForeground, setGrantedForeground] = useState<LocationPermissionResponse>()
+  const [grantedBackground, setGrantedBackground] = useState<LocationPermissionResponse>()
 
-  const [subscription, setSubscription] = useState<Subscription | null>(null);
+  const [subscription, setSubscription] = useState<Subscription>();
 
-  const Setup = () => {
+  const Setup = useCallback(() => {
     (async () => {
       if (Platform.OS === "android" && !Constants.isDevice) {
         setErrorMsg(
@@ -40,19 +40,18 @@ export default function LocationInfo() {
           catch((error) => { setErrorMsg(error) });
       }
     })();
-  };
-
-  const Remove = () => {
-    Location.stopLocationUpdatesAsync("LocationUpdates");
-
-    subscription && subscription.remove();
-    setSubscription(null);
-  };
+  }, []);
 
   useEffect(() => {
     Setup();
-    return () => Remove();
-  }, []);
+
+    return () => {
+      Location.stopLocationUpdatesAsync("LocationUpdates");
+
+      subscription && subscription.remove();
+      setSubscription(undefined);
+    };
+  }, [Setup]);
 
   return (
     <View style={styles.container}>

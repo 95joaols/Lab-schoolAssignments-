@@ -10,9 +10,9 @@ export default function MagnetometerInfo() {
     y: 0,
     z: 0,
   });
-  const [granted, setGranted] = useState<PermissionResponse | null>(null)
+  const [granted, setGranted] = useState<PermissionResponse>()
 
-  const Setup = () => {
+  useEffect(() => {
     (async () => {
       const respond = await Magnetometer.requestPermissionsAsync()
       setGranted(respond);
@@ -22,21 +22,14 @@ export default function MagnetometerInfo() {
         });
       }
     })();
-  };
-
-  const Remove = () => {
-    Magnetometer.removeAllListeners();
-  };
-
-  useEffect(() => {
-    Setup();
-    return () => Remove();
+    return Magnetometer.removeAllListeners;
   }, []);
 
   const { x, y, z } = data;
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Magnetometer:</Text>
+      <Text style={styles.paragraph}>Permissions:{granted?.status}</Text>
       <Text style={styles.paragraph}>
         x: {round(x)} y: {round(y)} z: {round(z)}
       </Text>

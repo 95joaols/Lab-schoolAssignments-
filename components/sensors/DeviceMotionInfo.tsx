@@ -6,10 +6,10 @@ import { styles } from "../../constants/SensorsStyles";
 
 
 export default function DeviceMotionInfo() {
-    const [deviceMotion, setDeviceMotion] = useState<DeviceMotionMeasurement | null>(null)
-    const [granted, setGranted] = useState<PermissionResponse | null>(null)
+    const [deviceMotion, setDeviceMotion] = useState<DeviceMotionMeasurement>()
+    const [granted, setGranted] = useState<PermissionResponse>()
 
-    const Setup = (() => {
+    useEffect(() => {
         (async () => {
             const respond = await DeviceMotion.requestPermissionsAsync()
             setGranted(respond);
@@ -18,14 +18,7 @@ export default function DeviceMotionInfo() {
                 DeviceMotion.addListener((device) => { setDeviceMotion(device) })
             }
         })();
-    })
-    const Remove = (() => {
-        DeviceMotion.removeAllListeners();
-    })
-
-    useEffect(() => {
-        Setup();
-        return () => Remove();
+        return DeviceMotion.removeAllListeners;
     }, []);
 
     if (deviceMotion) {

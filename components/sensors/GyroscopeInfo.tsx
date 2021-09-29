@@ -10,10 +10,9 @@ export default function GyroscopeInfo() {
     y: 0,
     z: 0,
   });
-  const [granted, setGranted] = useState<PermissionResponse | null>(null)
+  const [granted, setGranted] = useState<PermissionResponse>()
 
-
-  const Setup = () => {
+  useEffect(() => {
     (async () => {
       const respond = await Gyroscope.requestPermissionsAsync()
       setGranted(respond);
@@ -23,15 +22,7 @@ export default function GyroscopeInfo() {
         });
       }
     })();
-  };
-
-  const Remove = () => {
-    Gyroscope.removeAllListeners();
-  };
-
-  useEffect(() => {
-    Setup();
-    return () => Remove();
+    return Gyroscope.removeAllListeners;
   }, []);
 
   const { x, y, z } = data;
