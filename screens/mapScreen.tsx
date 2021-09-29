@@ -4,12 +4,16 @@ import { Text, View, TouchableHighlight } from "react-native";
 import { useEffect, useState } from "react";
 import { styles } from "../constants/Styles";
 import * as Location from "expo-location";
+import { ScreenOrientationContext } from "../contexts/ScreenOrientationContext";
+import { Orientation } from "expo-screen-orientation";
 
 
 function MapScreen() {
 
-  const [location, setLocation] = useState<Location.LocationObject | null>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const { screenOrientation } = React.useContext(ScreenOrientationContext);
+
+  const [location, setLocation] = useState<Location.LocationObject>();
+  const [errorMsg, setErrorMsg] = useState<string>();
   const [region, setRegion] = useState({
     latitude: 57.72107,
     longitude: 12.93982,
@@ -56,7 +60,11 @@ function MapScreen() {
   return (
     <View style={styles.root}>
       <MapView
-        style={styles.map}
+        style={
+          screenOrientation === Orientation.LANDSCAPE_RIGHT ||
+          screenOrientation === Orientation.LANDSCAPE_LEFT
+            ? styles.mapLandscape
+            : styles.map}
         region={region}
       >
         <Marker

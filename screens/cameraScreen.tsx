@@ -2,17 +2,13 @@ import { Camera } from "expo-camera";
 import { CameraType } from "expo-camera/build/Camera.types";
 import React, { FC, useEffect, useState } from "react";
 import { TouchableOpacity, Alert, Text, View } from "react-native";
-import { requestPermissionsAsync, createAssetAsync } from "expo-media-library";
+import * as Library from "expo-media-library";
 import Slider from "@react-native-community/slider";
 import { styles } from "../constants/cameraStyles";
 
 const CameraScreen: FC = () => {
-  const [cameraPermission, setCameraPermission] = useState<boolean | undefined>(
-    undefined
-  );
-  const [libraryPermission, setLibraryPermission] = useState<
-    boolean | undefined
-  >(undefined);
+  const [cameraPermission, setCameraPermission] = useState<boolean>(false);
+  const [libraryPermission, setLibraryPermission] = useState<boolean>(false);
   const [cameraType, setCameraType] = useState<CameraType>(
     Camera.Constants.Type.front
   );
@@ -23,34 +19,28 @@ const CameraScreen: FC = () => {
   const takePicture = async () => {
     if (cameraReady) {
       const picture = await camera?.takePictureAsync();
-      if (picture && libraryPermission) {
-        await createAssetAsync(picture.uri);
-        Alert.alert("Picture saved to picture album");
-      } else Alert.alert("No permissions!");
+      if (picture) {
+        await Library.createAssetAsync(picture.uri);
+        Alert.alert("Picture saved to photos");
+      }
     }
   };
 
   useEffect(() => {
     (async () => {
-      const { status } = await requestPermissionsAsync();
-      setLibraryPermission(status === "granted");
+      const libraryPermissionResponse = await Library.requestPermissionsAsync();
+      setLibraryPermission(libraryPermissionResponse.status === "granted");
+      const cameraPermissionResponse = await Camera.requestPermissionsAsync();
+      setCameraPermission(cameraPermissionResponse.status === "granted");
     })();
-  }, [libraryPermission]);
+  }, [cameraPermission, libraryPermission]);
 
-  useEffect(() => {
-    (async () => {
-      if (!cameraPermission) {
-        const { status } = await Camera.requestPermissionsAsync();
-        setCameraPermission(status === "granted");
-      }
-    })();
-  }, [cameraPermission]);
-
-  if (!cameraPermission) {
+  if (!cameraPermission || !libraryPermission) {
     return (
       <View style={styles.errorContainer}>
-        <Text style={{ color: "red" }}>
-          Error: Needs permission to access camera
+        <Text style={styles.errorText}>
+          Error: Needs permission to access "Camera" and/or "Files and media". {'\n\n'}
+          Go to Settings {'>'} Apps & notifications {'>'} Expo Go {'>'} Permissions. Allow "Files and media" and "Camera".
         </Text>
       </View>
     );
@@ -75,7 +65,7 @@ const CameraScreen: FC = () => {
           onSlidingComplete={(f) => {
             setCameraZoom(f);
           }}
-          style={styles.cameraSlider}
+          style={styles.slider}
           minimumValue={0}
           maximumValue={1}
           value={0}
@@ -86,7 +76,7 @@ const CameraScreen: FC = () => {
       </View>
       <View style={styles.buttonsDiv}>
         <TouchableOpacity
-          style={styles.cameraFlipButton}
+          style={styles.flipButton}
           onPress={() => {
             setCameraType(
               cameraType === Camera.Constants.Type.back
@@ -98,7 +88,7 @@ const CameraScreen: FC = () => {
           <Text style={styles.text}>Flip</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.cameraRoundButton}
+          style={styles.roundButton}
           onPress={takePicture}
         />
       </View>
