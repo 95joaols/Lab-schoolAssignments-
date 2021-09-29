@@ -8,8 +8,8 @@ import * as Location from "expo-location";
 
 function MapScreen() {
 
-  const [location, setLocation] = useState<Location.LocationObject | null>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [location, setLocation] = useState<Location.LocationObject>();
+  const [errorMsg, setErrorMsg] = useState<string>();
   const [region, setRegion] = useState({
     latitude: 57.72107,
     longitude: 12.93982,
