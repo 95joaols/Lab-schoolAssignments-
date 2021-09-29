@@ -47,4 +47,8 @@ export const styles = StyleSheet.create({
         width: Dimensions.get("window").width,
         height: Dimensions.get("window").height,
       },
+    mapLandscape: {
+        width: Dimensions.get("window").height,
+        height: Dimensions.get("window").width, 
+    },
 });
