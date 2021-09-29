@@ -55,7 +55,6 @@ const CameraScreen: FC = () => {
         camera = reference;
       }}
       style={styles.camera}
-      useCamera2Api
       onCameraReady={() => {
         setCameraReady(true);
       }}
