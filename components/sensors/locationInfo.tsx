@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Platform, Text, View } from "react-native";
+import { Subscription } from "@unimodules/react-native-adapter";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
+import { LocationObject, LocationOptions, LocationPermissionResponse } from "expo-location";
+import React, { useCallback, useEffect, useState } from "react";
+import { Platform, Text, View } from "react-native";
 import { styles } from "../../constants/SensorsStyles";
 
 export default function LocationInfo() {
-  const [location, setLocation] = useState<Location.LocationObject | null>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [status, setStatus] = useState<string | null>(null);
+  const [location, setLocation] = useState<LocationObject>();
+  const [errorMsg, setErrorMsg] = useState<string>();
+  const [grantedForeground, setGrantedForeground] = useState<LocationPermissionResponse>()
+  const [grantedBackground, setGrantedBackground] = useState<LocationPermissionResponse>()
 
-  useEffect(() => {
+  const [subscription, setSubscription] = useState<Subscription>();
+
+  const Setup = useCallback(() => {
     (async () => {
       if (Platform.OS === "android" && !Constants.isDevice) {
         setErrorMsg(
@@ -17,32 +22,59 @@ export default function LocationInfo() {
         );
         return;
       }
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      setStatus(status);
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
+      const respond = await Location.requestForegroundPermissionsAsync()
+      setGrantedForeground(respond);
+      if (respond.granted) {
+        const respondBackground = await Location.requestBackgroundPermissionsAsync();
+        setGrantedBackground(respondBackground);
+
+        if (respondBackground.granted) {
+          await Location.startLocationUpdatesAsync("LocationUpdates");
+        }
+
+
+        let test: LocationOptions = {}
+        Location.watchPositionAsync(test, (location) => {
+          setLocation(location);
+        }).then((sub) => { setSubscription(sub) }).
+          catch((error) => { setErrorMsg(error) });
       }
-      Location.getCurrentPositionAsync()
-        .then((location) => setLocation(location))
-        .catch((error) => setErrorMsg(error.message));
     })();
   }, []);
 
-  let text = "Waiting..";
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
-  }
+  useEffect(() => {
+    Setup();
+
+    return () => {
+      Location.stopLocationUpdatesAsync("LocationUpdates");
+
+      subscription && subscription.remove();
+      setSubscription(undefined);
+    };
+  }, [Setup]);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Location:</Text>
-      <Text style={styles.paragraph}>Permissions:{status}</Text>
+      <Text style={styles.paragraph}>Permissions foreground:{grantedForeground?.status}</Text>
+      <Text style={styles.paragraph}>Permissions grantedBackground:{grantedBackground?.status}</Text>
 
-      <Text style={styles.paragraph}>{text}</Text>
+      {errorMsg && <Text style={styles.paragraph}>Error:{errorMsg}</Text>}
+      {errorMsg == null && <Text style={styles.paragraph}>accuracy:{round(location?.coords.accuracy)}</Text>}
+      {errorMsg == null && <Text style={styles.paragraph}>latitude:{round(location?.coords.latitude)}</Text>}
+      {errorMsg == null && <Text style={styles.paragraph}>longitude:{round(location?.coords.longitude)}</Text>}
+      {errorMsg == null && <Text style={styles.paragraph}>heading:{round(location?.coords.heading)}</Text>}
+      {errorMsg == null && <Text style={styles.paragraph}>speed:{round(location?.coords.speed)}</Text>}
+      {errorMsg == null && <Text style={styles.paragraph}>altitudeAccuracy:{round(location?.coords.altitudeAccuracy)}</Text>}
+      {errorMsg == null && <Text style={styles.paragraph}>altitude:{round(location?.coords.altitude)}</Text>}
+
     </View>
   );
 }
 
+function round(n: number | undefined | null) {
+  if (!n) {
+    return 0;
+  }
+  return Math.floor(n * 100) / 100;
+}

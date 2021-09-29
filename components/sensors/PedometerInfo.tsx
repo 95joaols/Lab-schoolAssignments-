@@ -5,7 +5,7 @@ import { Pedometer } from "expo-sensors";
 import { styles } from "../../constants/SensorsStyles";
 
 export default function PedometerInfo() {
-  const [subscription, setSubscription] = useState<Subscription | null>(null);
+  const [subscription, setSubscription] = useState<Subscription>();
   const [isPedometerAvailable, setIsPedometerAvailable] = useState({
     isPedometerAvailable: "checking",
   });
@@ -16,17 +16,9 @@ export default function PedometerInfo() {
     steps: 0,
   });
 
-  const subscribe = () => {
-    setSubscription(
-      Pedometer.watchStepCount((result) => {
-        setCurrentStepCount(result);
-      })
-    );
-  };
-  const unsubscribe = () => {
-    subscription && subscription.remove();
-    setSubscription(null);
-  };
+
+
+
   useEffect(() => {
     Pedometer.isAvailableAsync().then(
       (result) => {
@@ -38,26 +30,40 @@ export default function PedometerInfo() {
         });
       }
     );
-  }, []);
+  });
+
   useEffect(() => {
-    const end = new Date();
-    const start = new Date();
-    start.setDate(end.getDate() - 1);
-    Pedometer.getStepCountAsync(start, end)
-      .then(
-        (result) => {
-          setPastStepCount(result);
-        },
-        (error) => {
-          setPastStepCount({ steps: -1 });
-        }
-      )
-      .catch((error) => {});
-  }, [isPedometerAvailable]),
-    useEffect(() => {
-      subscribe();
-      return () => unsubscribe();
-    }, []);
+    if (isPedometerAvailable) {
+      const end = new Date();
+      const start = new Date();
+      start.setDate(end.getDate() - 1);
+      Pedometer.getStepCountAsync(start, end)
+        .then(
+          (result) => {
+            setPastStepCount(result);
+          },
+          (error) => {
+            setPastStepCount({ steps: -1 });
+          }
+        )
+        .catch((error) => { });
+    }
+  }, [isPedometerAvailable]);
+
+  useEffect(() => {
+    if (isPedometerAvailable) {
+      setSubscription(
+        Pedometer.watchStepCount((result) => {
+          setCurrentStepCount(result);
+        })
+      );
+    }
+    return () => {
+      subscription && subscription.remove();
+      setSubscription(undefined);
+    }
+  }, [isPedometerAvailable]);
+
 
   return (
     <View style={styles.container}>
