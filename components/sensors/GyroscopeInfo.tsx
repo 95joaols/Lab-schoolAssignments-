@@ -17,6 +17,7 @@ export default function GyroscopeInfo() {
       const respond = await Gyroscope.requestPermissionsAsync()
       setGranted(respond);
       if (respond.granted) {
+        Gyroscope.setUpdateInterval(50);
         Gyroscope.addListener((gyroscopeData) => {
           setData(gyroscopeData);
         });

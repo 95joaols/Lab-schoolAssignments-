@@ -17,6 +17,7 @@ export default function AccelerometerInfo() {
       const respond = await Accelerometer.requestPermissionsAsync()
       setGranted(respond);
       if (respond.granted) {
+        Accelerometer.setUpdateInterval(50);
         Accelerometer.addListener((accelerometerData) => {
           setData(accelerometerData);
         });

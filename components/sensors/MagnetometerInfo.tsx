@@ -17,6 +17,7 @@ export default function MagnetometerInfo() {
       const respond = await Magnetometer.requestPermissionsAsync()
       setGranted(respond);
       if (respond.granted) {
+        Magnetometer.setUpdateInterval(50);
         Magnetometer.addListener((result) => {
           setData(result);
         });
