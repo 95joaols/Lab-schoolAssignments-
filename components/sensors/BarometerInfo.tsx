@@ -16,6 +16,7 @@ export default function BarometerInfo() {
     (async () => {
       const respond = await Barometer.requestPermissionsAsync()
       setGranted(respond);
+      Barometer.setUpdateInterval(50);
       Barometer.addListener((barometerData) => {
         setData(barometerData);
       });

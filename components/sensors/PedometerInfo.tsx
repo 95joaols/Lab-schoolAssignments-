@@ -48,7 +48,7 @@ export default function PedometerInfo() {
         )
         .catch((error) => { });
     }
-  }, [isPedometerAvailable]);
+  }, []);
 
   useEffect(() => {
     if (isPedometerAvailable) {
@@ -62,7 +62,7 @@ export default function PedometerInfo() {
       subscription && subscription.remove();
       setSubscription(undefined);
     }
-  }, [isPedometerAvailable]);
+  }, []);
 
 
   return (

@@ -14,7 +14,7 @@ export default function DeviceMotionInfo() {
             const respond = await DeviceMotion.requestPermissionsAsync()
             setGranted(respond);
             if (respond.granted) {
-                DeviceMotion.setUpdateInterval(40)
+                DeviceMotion.setUpdateInterval(50)
                 DeviceMotion.addListener((device) => { setDeviceMotion(device) })
             }
         })();
@@ -61,7 +61,7 @@ export default function DeviceMotionInfo() {
                     acceleration:
                 </Text>
                 <Text style={styles.paragraph}>
-                    granted: {String(granted)}
+                    granted: {String(granted?.status)}
                 </Text>
                 <Text style={styles.paragraph}>
                     No data
