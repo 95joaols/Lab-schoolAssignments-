@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Text, View } from "react-native";
 import { styles } from "../../constants/SensorsStyles";
-import { GyroscopeContext } from "../../contexts/GyroscopeContext";
+import { GyroscopeContext } from "../../contexts/sensors/GyroscopeContext";
 
 export default function GyroscopeInfo() {
   const gyroscope = useContext(GyroscopeContext)

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Text, View } from "react-native";
 import { styles } from "../../constants/SensorsStyles";
-import { MagnetometerContext } from "../../contexts/MagnetometerContext";
+import { MagnetometerContext } from "../../contexts/sensors/MagnetometerContext";
 
 export default function MagnetometerInfo() {
   const magnetometer = useContext(MagnetometerContext)

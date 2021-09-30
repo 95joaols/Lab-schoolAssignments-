@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Platform, Text, View } from "react-native";
 import { styles } from "../../constants/SensorsStyles";
-import PedometerContext from "../../contexts/sensors/PedometerContext";
+import { PedometerContext } from "../../contexts/sensors/PedometerContext";
 
 export default function PedometerInfo() {
   const Pedometer = useContext(PedometerContext)

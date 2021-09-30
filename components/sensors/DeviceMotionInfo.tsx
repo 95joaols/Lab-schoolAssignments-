@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Text, View } from "react-native";
 import { styles } from "../../constants/SensorsStyles";
-import DeviceMotionContext from "../../contexts/sensors/DeviceMotionContext";
+import { DeviceMotionContext } from "../../contexts/sensors/DeviceMotionContext";
 
 
 export default function DeviceMotionInfo() {
