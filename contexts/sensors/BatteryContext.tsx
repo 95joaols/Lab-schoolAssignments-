@@ -1,7 +1,7 @@
 import * as Battery from "expo-battery";
 import { BatteryState, Subscription } from "expo-battery";
 import React, { createContext, FC, useCallback, useEffect, useState } from "react";
-import UseObjectState from "../hooks/UseObjectState";
+import UseObjectState from "../../hooks/UseObjectState";
 
 interface ContextValue {
     powerState: Battery.PowerState;

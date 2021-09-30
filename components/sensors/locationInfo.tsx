@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Text, View } from "react-native";
 import { styles } from "../../constants/SensorsStyles";
-import { LocationContext } from "../../contexts/locationContext";
+import { LocationContext } from "../../contexts/sensors/locationContext";
 
 export default function LocationInfo() {
   const Location = useContext(LocationContext)
