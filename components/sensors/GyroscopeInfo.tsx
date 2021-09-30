@@ -1,42 +1,36 @@
-import { Gyroscope } from "expo-sensors";
-import { PermissionResponse } from "expo-sensors/build/Pedometer";
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Text, View } from "react-native";
 import { styles } from "../../constants/SensorsStyles";
+import { GyroscopeContext } from "../../contexts/GyroscopeContext";
 
 export default function GyroscopeInfo() {
-  const [data, setData] = useState({
-    x: 0,
-    y: 0,
-    z: 0,
-  });
-  const [granted, setGranted] = useState<PermissionResponse>()
+  const gyroscope = useContext(GyroscopeContext)
 
-  useEffect(() => {
-    (async () => {
-      const respond = await Gyroscope.requestPermissionsAsync()
-      setGranted(respond);
-      if (respond.granted) {
-        Gyroscope.setUpdateInterval(50);
-        Gyroscope.addListener((gyroscopeData) => {
-          setData(gyroscopeData);
-        });
-      }
-    })();
-    return Gyroscope.removeAllListeners;
-  }, []);
 
-  const { x, y, z } = data;
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Gyroscope:</Text>
-      <Text style={styles.paragraph}>Permissions:{granted?.status}</Text>
+  if (gyroscope.gyroscopeInfo) {
+    const { x, y, z } = gyroscope.gyroscopeInfo;
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Gyroscope:</Text>
+        <Text style={styles.paragraph}>Permissions:{gyroscope.granted?.status}</Text>
 
-      <Text style={styles.paragraph}>
-        x: {round(x)} y: {round(y)} z: {round(z)}
-      </Text>
-    </View>
-  );
+        <Text style={styles.paragraph}>
+          x: {round(x)} y: {round(y)} z: {round(z)}
+        </Text>
+      </View>
+    );
+  }
+  else {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Gyroscope:</Text>
+        <Text style={styles.paragraph}>Permissions:{gyroscope.granted?.status}</Text>
+        <Text style={styles.paragraph}>
+          No Data
+        </Text>
+      </View>
+    );
+  }
 }
 
 function round(n: number) {
