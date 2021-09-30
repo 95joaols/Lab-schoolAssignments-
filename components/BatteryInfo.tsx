@@ -1,58 +1,13 @@
-import * as Battery from "expo-battery";
-import { BatteryState, Subscription } from "expo-battery";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Text, View } from "react-native";
 import { styles } from "../constants/SensorsStyles";
-import UseObjectState from "../hooks/UseObjectState";
+import { BatteryContext } from "../contexts/BatteryContext";
 
 export default function BatteryInfo() {
-  const [powerState, setPowerState] = UseObjectState({
-    batteryLevel: -1,
-    batteryState: BatteryState.UNKNOWN,
-    lowPowerMode: false,
-  });
-  const [batteryStateSubscriptions, setBatteryStateSubscriptions] = useState<
-    Subscription[]
-  >();
+  const Battery = useContext(BatteryContext)
 
-  const subscribe = useCallback(() => {
-    Battery.getPowerStateAsync().then((State) => setPowerState(State));
 
-    setBatteryStateSubscriptions([
-      Battery.addBatteryLevelListener((batteryLevel) => {
-        setPowerState(batteryLevel);
-      }),
-      Battery.addBatteryStateListener((batteryState) => {
-        setPowerState(batteryState);
-      }),
-      Battery.addLowPowerModeListener((lowPowerMode) => {
-        setPowerState(lowPowerMode);
-      }),
-    ]);
-  }, []);
-
-  const unsubscribe = useCallback(() => {
-    batteryStateSubscriptions &&
-      batteryStateSubscriptions[0] &&
-      batteryStateSubscriptions[0].remove();
-
-    batteryStateSubscriptions &&
-      batteryStateSubscriptions[1] &&
-      batteryStateSubscriptions[1].remove();
-
-    batteryStateSubscriptions &&
-      batteryStateSubscriptions[2] &&
-      batteryStateSubscriptions[2].remove();
-
-    setBatteryStateSubscriptions(undefined);
-  }, []);
-
-  useEffect(() => {
-    subscribe();
-    return () => unsubscribe();
-  }, [subscribe, unsubscribe]);
-
-  const { batteryLevel, batteryState, lowPowerMode } = powerState;
+  const { batteryLevel, batteryState, lowPowerMode } = Battery.powerState;
   return (
     <View style={styles.container}>
       <Text style={styles.title}>PowerState:</Text>

@@ -10,6 +10,7 @@ import InfoScreen from './screens/InfoScreen';
 import BackgroundSelectorScreen from "./screens/BackgroundSelectorScreen";
 import MapScreen from './screens/mapScreen';
 import ScreenOrientationProvider from "./contexts/ScreenOrientationContext";
+import { SensorsProviderGroup } from './contexts/SensorsProviderGroup';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -17,16 +18,18 @@ export default function App() {
   return (
     <ScreenOrientationProvider>
       <BackgroundImageProvider>
-        <NavigationContainer theme={navigationTheme}>
-          <BackgroundImage />
-          <Stack.Navigator screenOptions={navigatorTheme} >
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Camera" component={CameraScreen} />
-            <Stack.Screen name="Info" component={InfoScreen} />
-            <Stack.Screen name="Background" component={BackgroundSelectorScreen} />
-            <Stack.Screen name="Map" component={MapScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <SensorsProviderGroup>
+          <NavigationContainer theme={navigationTheme}>
+            <BackgroundImage />
+            <Stack.Navigator screenOptions={navigatorTheme} >
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="Camera" component={CameraScreen} />
+              <Stack.Screen name="Info" component={InfoScreen} />
+              <Stack.Screen name="Background" component={BackgroundSelectorScreen} />
+              <Stack.Screen name="Map" component={MapScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </SensorsProviderGroup>
       </BackgroundImageProvider>
     </ScreenOrientationProvider>
   );

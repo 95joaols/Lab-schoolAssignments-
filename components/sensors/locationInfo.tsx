@@ -1,78 +1,44 @@
-import { Subscription } from "@unimodules/react-native-adapter";
-import Constants from "expo-constants";
-import * as Location from "expo-location";
-import { LocationObject, LocationOptions, LocationPermissionResponse } from "expo-location";
-import React, { useCallback, useEffect, useState } from "react";
-import { Platform, Text, View } from "react-native";
+import React, { useContext } from "react";
+import { Text, View } from "react-native";
 import { styles } from "../../constants/SensorsStyles";
+import { LocationContext } from "../../contexts/locationContext";
 
 export default function LocationInfo() {
-  const [location, setLocation] = useState<LocationObject>();
-  const [errorMsg, setErrorMsg] = useState<string>();
-  const [grantedForeground, setGrantedForeground] = useState<LocationPermissionResponse>()
-  const [grantedBackground, setGrantedBackground] = useState<LocationPermissionResponse>()
+  const Location = useContext(LocationContext)
 
-  const [subscription, setSubscription] = useState<Subscription>();
+  if (Location.errorMsg) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Location:</Text>
+        <Text style={styles.paragraph}>Permissions foreground:{Location.grantedForeground?.status}</Text>
+        <Text style={styles.paragraph}>Permissions grantedBackground:{Location.grantedBackground?.status}</Text>
 
-  const Setup = useCallback(() => {
-    (async () => {
-      if (Platform.OS === "android" && !Constants.isDevice) {
-        setErrorMsg(
-          "Oops, this will not work on Snack in an Android emulator. Try it on your device!"
-        );
-        return;
-      }
-      const respond = await Location.requestForegroundPermissionsAsync()
-      setGrantedForeground(respond);
-      if (respond.granted) {
-        const respondBackground = await Location.requestBackgroundPermissionsAsync();
-        setGrantedBackground(respondBackground);
+        <Text style={styles.paragraph}>Error:{Location.errorMsg}</Text>
+      </View>
+    );
+  }
+  if (Location.location) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Location:</Text>
+        <Text style={styles.paragraph}>Permissions foreground:{Location.grantedForeground?.status}</Text>
+        <Text style={styles.paragraph}>Permissions grantedBackground:{Location.grantedBackground?.status}</Text>
 
-        if (respondBackground.granted) {
-          await Location.startLocationUpdatesAsync("LocationUpdates");
-        }
+        <Text style={styles.paragraph}>accuracy:{round(Location.location.coords.accuracy)}</Text>
+        <Text style={styles.paragraph}>latitude:{round(Location.location.coords.latitude)}</Text>
+        <Text style={styles.paragraph}>longitude:{round(Location.location.coords.longitude)}</Text>
+        <Text style={styles.paragraph}>heading:{round(Location.location.coords.heading)}</Text>
+        <Text style={styles.paragraph}>speed:{round(Location.location.coords.speed)}</Text>
+        <Text style={styles.paragraph}>altitudeAccuracy:{round(Location.location.coords.altitudeAccuracy)}</Text>
+        <Text style={styles.paragraph}>altitude:{round(Location.location.coords.altitude)}</Text>
 
+      </View>
+    );
+  }
 
-        let test: LocationOptions = {}
-        Location.watchPositionAsync(test, (location) => {
-          setLocation(location);
-        }).then((sub) => { setSubscription(sub) }).
-          catch((error) => { setErrorMsg(error) });
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
-    Setup();
-
-    return () => {
-      Location.stopLocationUpdatesAsync("LocationUpdates");
-
-      subscription && subscription.remove();
-      setSubscription(undefined);
-    };
-  }, [Setup]);
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Location:</Text>
-      <Text style={styles.paragraph}>Permissions foreground:{grantedForeground?.status}</Text>
-      <Text style={styles.paragraph}>Permissions grantedBackground:{grantedBackground?.status}</Text>
-
-      {errorMsg && <Text style={styles.paragraph}>Error:{errorMsg}</Text>}
-      {errorMsg == null && <Text style={styles.paragraph}>accuracy:{round(location?.coords.accuracy)}</Text>}
-      {errorMsg == null && <Text style={styles.paragraph}>latitude:{round(location?.coords.latitude)}</Text>}
-      {errorMsg == null && <Text style={styles.paragraph}>longitude:{round(location?.coords.longitude)}</Text>}
-      {errorMsg == null && <Text style={styles.paragraph}>heading:{round(location?.coords.heading)}</Text>}
-      {errorMsg == null && <Text style={styles.paragraph}>speed:{round(location?.coords.speed)}</Text>}
-      {errorMsg == null && <Text style={styles.paragraph}>altitudeAccuracy:{round(location?.coords.altitudeAccuracy)}</Text>}
-      {errorMsg == null && <Text style={styles.paragraph}>altitude:{round(location?.coords.altitude)}</Text>}
-
-    </View>
-  );
 }
 
-function round(n: number | undefined | null) {
+function round(n: number | null) {
   if (!n) {
     return 0;
   }

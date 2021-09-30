@@ -1,44 +1,37 @@
-import { PermissionResponse } from "expo-camera";
-import { Accelerometer } from "expo-sensors";
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Text, View } from "react-native";
 import { styles } from "../../constants/SensorsStyles";
+import { AccelerometerContext } from "../../contexts/sensors/AccelerometerContext";
 
 export default function AccelerometerInfo() {
-  const [data, setData] = useState({
-    x: 0,
-    y: 0,
-    z: 0,
-  });
-  const [granted, setGranted] = useState<PermissionResponse>()
+  const accelerometer = useContext(AccelerometerContext)
 
-  useEffect(() => {
-    (async () => {
-      const respond = await Accelerometer.requestPermissionsAsync()
-      setGranted(respond);
-      if (respond.granted) {
-        Accelerometer.setUpdateInterval(50);
-        Accelerometer.addListener((accelerometerData) => {
-          setData(accelerometerData);
-        });
-      }
-    })();
-    return Accelerometer.removeAllListeners;
-  }, []);
+  if (accelerometer.accelerometerInfo) {
+    const { x, y, z } = accelerometer.accelerometerInfo;
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          Accelerometer: (in Gs where 1 G = 9.81 m s^-2)
+        </Text>
+        <Text style={styles.paragraph}>
+          x: {round(x)} y: {round(y)} z: {round(z)}
+        </Text>
+        <Text style={styles.paragraph}>Permissions:{accelerometer.granted?.status}</Text>
 
-  const { x, y, z } = data;
-  return (
+      </View>
+    );
+  }
+  else {
     <View style={styles.container}>
       <Text style={styles.title}>
-        Accelerometer: (in Gs where 1 G = 9.81 m s^-2)
+        Accelerometer:
       </Text>
       <Text style={styles.paragraph}>
-        x: {round(x)} y: {round(y)} z: {round(z)}
+        No Data
       </Text>
-      <Text style={styles.paragraph}>Permissions:{granted?.status}</Text>
-
+      <Text style={styles.paragraph}>Permissions:{accelerometer.granted?.status}</Text>
     </View>
-  );
+  }
 }
 
 function round(n: number) {

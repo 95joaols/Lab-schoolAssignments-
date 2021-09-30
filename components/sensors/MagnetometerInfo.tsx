@@ -1,41 +1,34 @@
-import { Magnetometer } from "expo-sensors";
-import { PermissionResponse } from "expo-sensors/build/Pedometer";
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Text, View } from "react-native";
 import { styles } from "../../constants/SensorsStyles";
+import { MagnetometerContext } from "../../contexts/MagnetometerContext";
 
 export default function MagnetometerInfo() {
-  const [data, setData] = useState({
-    x: 0,
-    y: 0,
-    z: 0,
-  });
-  const [granted, setGranted] = useState<PermissionResponse>()
+  const magnetometer = useContext(MagnetometerContext)
 
-  useEffect(() => {
-    (async () => {
-      const respond = await Magnetometer.requestPermissionsAsync()
-      setGranted(respond);
-      if (respond.granted) {
-        Magnetometer.setUpdateInterval(50);
-        Magnetometer.addListener((result) => {
-          setData(result);
-        });
-      }
-    })();
-    return Magnetometer.removeAllListeners;
-  }, []);
-
-  const { x, y, z } = data;
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Magnetometer:</Text>
-      <Text style={styles.paragraph}>Permissions:{granted?.status}</Text>
-      <Text style={styles.paragraph}>
-        x: {round(x)} y: {round(y)} z: {round(z)}
-      </Text>
-    </View>
-  );
+  if (magnetometer.barometerInfo) {
+    const { x, y, z } = magnetometer.barometerInfo;
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Magnetometer:</Text>
+        <Text style={styles.paragraph}>Permissions:{magnetometer.granted?.status}</Text>
+        <Text style={styles.paragraph}>
+          x: {round(x)} y: {round(y)} z: {round(z)}
+        </Text>
+      </View>
+    );
+  }
+  else {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Magnetometer:</Text>
+        <Text style={styles.paragraph}>Permissions:{magnetometer.granted?.status}</Text>
+        <Text style={styles.paragraph}>
+          No Data
+        </Text>
+      </View>
+    );
+  }
 }
 
 function round(n: number) {
