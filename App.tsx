@@ -10,7 +10,7 @@ import InfoScreen from './screens/InfoScreen';
 import BackgroundSelectorScreen from "./screens/BackgroundSelectorScreen";
 import MapScreen from './screens/mapScreen';
 import ScreenOrientationProvider from "./contexts/ScreenOrientationContext";
-import { SensorsProviderGroup } from './contexts/SensorsProviderGroup';
+import { SensorsProviderGroup } from './contexts/sensors/SensorsProviderGroup';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
