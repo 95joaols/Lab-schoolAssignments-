@@ -1,9 +1,8 @@
-import * as React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import MapView, { Callout, Marker } from "react-native-maps";
 import { Text, View, TouchableHighlight } from "react-native";
-import { useEffect, useState } from "react";
 import { styles } from "../constants/Styles";
-import * as Location from "expo-location";
+import { LocationObject } from "expo-location";
 import { ScreenOrientationContext } from "../contexts/ScreenOrientationContext";
 import { Orientation } from "expo-screen-orientation";
 import { LocationContext } from "../contexts/sensors/locationContext";
@@ -11,11 +10,11 @@ import { LocationContext } from "../contexts/sensors/locationContext";
 
 function MapScreen() {
 
-  const Location = React.useContext(LocationContext);
+  const Location = useContext(LocationContext);
 
-  const { screenOrientation } = React.useContext(ScreenOrientationContext);
+  const { screenOrientation } = useContext(ScreenOrientationContext);
 
-  const [location, setLocation] = useState<Location.LocationObject>();
+  const [location, setLocation] = useState<LocationObject>();
   const [errorMsg, setErrorMsg] = useState<string>();
   const [region, setRegion] = useState({
     latitude: 57.72107,
