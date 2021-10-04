@@ -1,11 +1,6 @@
 import React, { useState, useContext } from "react";
 import MapView, { Callout, Marker } from "react-native-maps";
-import {
-  Text,
-  View,
-  TouchableHighlight,
-  Modal
-} from "react-native";
+import { Text, View, TouchableHighlight, Modal } from "react-native";
 import { styles } from "../constants/Styles";
 import { ScreenOrientationContext } from "../contexts/ScreenOrientationContext";
 import { Orientation } from "expo-screen-orientation";
@@ -17,7 +12,7 @@ function MapScreen() {
   const { screenOrientation } = useContext(ScreenOrientationContext);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [errorMsg, setErrorMsg] = useState(Location.errorMsg);
+  const [errorMsg, setErrorMsg] = useState<string>();
   const [region, setRegion] = useState({
     latitude: 57.72107,
     longitude: 12.93982,
@@ -136,6 +131,6 @@ function MapScreen() {
       </Callout>
     </View>
   );
-};
+}
 
 export default MapScreen;
