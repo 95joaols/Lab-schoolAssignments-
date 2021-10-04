@@ -72,7 +72,7 @@ function MapScreen() {
         />
       </MapView>
       <Callout style={styles.buttonsContainer}>
-        <TouchableHighlight onPress={getLocation} style={styles.button}>
+        <TouchableHighlight onPress={getLocation} style={styles.button} underlayColor={"#B6B8A8"}>
           <Text style={styles.buttonText}>{text}</Text>
         </TouchableHighlight>
       </Callout>

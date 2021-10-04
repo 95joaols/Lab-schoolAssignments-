@@ -43,6 +43,24 @@ export const styles = StyleSheet.create({
         resizeMode: "cover",
         zIndex: -1,
     },
+    backgroundImagePreview: {
+        height: 400,
+        width: 300,
+    },
+    backgroundImagePreviewLandscape: {
+        height: 200,
+        width: 200,
+    },
+    backgroundImagePreviewContainer: {
+        borderWidth: 3,
+        borderColor: "white"
+    },
+    backgroundImagePreviewContainerLandscape: {
+        top: 10,
+        position: "absolute",
+        borderWidth: 3,
+        borderColor: "white"
+    },
     map: {
         width: Dimensions.get("window").width,
         height: Dimensions.get("window").height,
