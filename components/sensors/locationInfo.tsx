@@ -35,6 +35,16 @@ export default function LocationInfo() {
       </View>
     );
   }
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Location:</Text>
+      <Text style={styles.paragraph}>Permissions foreground:{Location.grantedForeground?.status}</Text>
+      <Text style={styles.paragraph}>Permissions grantedBackground:{Location.grantedBackground?.status}</Text>
+
+      <Text style={styles.paragraph}>No Data</Text>
+    </View>
+  );
+
 
 }
 
