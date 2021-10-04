@@ -6,9 +6,12 @@ import { styles } from "../constants/Styles";
 import * as Location from "expo-location";
 import { ScreenOrientationContext } from "../contexts/ScreenOrientationContext";
 import { Orientation } from "expo-screen-orientation";
+import { LocationContext } from "../contexts/sensors/locationContext";
 
 
 function MapScreen() {
+
+  const Location = React.useContext(LocationContext);
 
   const { screenOrientation } = React.useContext(ScreenOrientationContext);
 
@@ -23,19 +26,13 @@ function MapScreen() {
 
   useEffect(() => {
     (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
+      if (Location.grantedForeground?.status !== "granted") {
         setErrorMsg("Disabled, No Permission");
         return;
       }
-      let userLocation = await Location.getLastKnownPositionAsync({});
-      if (userLocation){
-      setLocation(userLocation);
-      } else if (!userLocation) {
-        setErrorMsg("Location Not Available")      
-      };
+      setLocation(Location.location)
     })();
-  }, []);
+  }, );
 
   let text = "Waiting..";
   if (errorMsg) {
