@@ -7,13 +7,15 @@ export default function LocationInfo() {
   const Location = useContext(LocationContext)
 
   if (Location.errorMsg) {
+
+
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Location:</Text>
         <Text style={styles.paragraph}>Permissions foreground:{Location.grantedForeground?.status}</Text>
         <Text style={styles.paragraph}>Permissions grantedBackground:{Location.grantedBackground?.status}</Text>
 
-        <Text style={styles.paragraph}>Error:{Location.errorMsg}</Text>
+        <Text style={styles.paragraph}>{Location.errorMsg}</Text>
       </View>
     );
   }
