@@ -25,18 +25,18 @@ function HomeScreen({ navigation }: Props) {
       ]}
     >
       <View style={styles.subView}>
-        <TouchableHighlight onPress={() => navigation.navigate("Camera")} style={styles.button}>
+        <TouchableHighlight onPress={() => navigation.navigate("Camera")} style={styles.button} underlayColor={"#B6B8A8"}>
           <Text style={styles.buttonText}>Kamera</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={() => navigation.navigate("Info")} style={styles.button}>
+        <TouchableHighlight onPress={() => navigation.navigate("Info")} style={styles.button} underlayColor={"#B6B8A8"}>
           <Text style={styles.buttonText}>Info</Text>
         </TouchableHighlight>
       </View>
       <View style={styles.subView}>
-        <TouchableHighlight onPress={() => navigation.navigate("Background")} style={styles.button}>
+        <TouchableHighlight onPress={() => navigation.navigate("Background")} style={styles.button} underlayColor={"#B6B8A8"}>
           <Text style={styles.buttonText}>Bakgrundsbild</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={() => navigation.navigate("Map")} style={styles.button}>
+        <TouchableHighlight onPress={() => navigation.navigate("Map")} style={styles.button} underlayColor={"#B6B8A8"}>
           <Text style={styles.buttonText}>Karta</Text>
         </TouchableHighlight>
       </View>
