@@ -1,7 +1,7 @@
 import { Subscription } from "@unimodules/react-native-adapter";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
-import { LocationObject, LocationOptions, LocationPermissionResponse } from "expo-location";
+import { LocationObject, LocationPermissionResponse } from "expo-location";
 import React, { createContext, FC, useCallback, useEffect, useState } from "react";
 import { Platform } from "react-native";
 
@@ -44,11 +44,11 @@ const LocationProvider: FC = (props) => {
                 if (respondBackground.granted) {
                     await Location.startLocationUpdatesAsync("LocationUpdates");
                 }
-
                 Location.watchPositionAsync({}, (location) => {
                     setLocation(location);
-                }).then((sub) => { setSubscription(sub) }).
-                    catch((error) => { setErrorMsg(error) });
+                }).then((sub) => { setSubscription(sub); })
+                    .catch((error) => { setErrorMsg(String(error)); });
+
             }
         })();
     }, []);
