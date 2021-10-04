@@ -1,21 +1,17 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import MapView, { Callout, Marker } from "react-native-maps";
 import { Text, View, TouchableHighlight } from "react-native";
 import { styles } from "../constants/Styles";
-import { LocationObject } from "expo-location";
 import { ScreenOrientationContext } from "../contexts/ScreenOrientationContext";
 import { Orientation } from "expo-screen-orientation";
 import { LocationContext } from "../contexts/sensors/locationContext";
 
-
 function MapScreen() {
-
   const Location = useContext(LocationContext);
 
   const { screenOrientation } = useContext(ScreenOrientationContext);
 
-  const [location, setLocation] = useState<LocationObject>();
-  const [errorMsg, setErrorMsg] = useState<string>();
+  const [errorMsg, setErrorMsg] = useState(Location.errorMsg);
   const [region, setRegion] = useState({
     latitude: 57.72107,
     longitude: 12.93982,
@@ -23,34 +19,31 @@ function MapScreen() {
     longitudeDelta: 0.01,
   });
 
-  useEffect(() => {
-    (async () => {
-      if (Location.grantedForeground?.status !== "granted") {
-        setErrorMsg("Disabled, No Permission");
-        return;
-      }
-      setLocation(Location.location)
-    })();
-  }, );
+  if (Location.grantedForeground?.status !== "granted") {
+    setErrorMsg("Disabled, No Permission");
+    return;
+  }
 
   let text = "Waiting..";
   if (errorMsg) {
     text = errorMsg;
-  } else if (location) {
+  } else if (Location.location !== undefined) {
     text = "Se Din Position";
   }
 
-  const getLocation = () => {    
-    if (location) {
-      let userLatitude = location.coords.latitude;
-      let userLongitude = location.coords.longitude;
-      setRegion({
-        latitude: userLatitude,
-        longitude: userLongitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
-      });
-    };
+  const getLocation = () => {
+    if (Location.grantedForeground?.status === "granted") {
+      if (Location.location !== undefined) {
+        setRegion({
+          latitude: Location.location?.coords.latitude,
+          longitude: Location.location?.coords.longitude,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
+        });
+      } else if (Location.location === undefined) {
+        text = "Location not available";
+      }
+    }
   };
 
   return (
@@ -60,7 +53,8 @@ function MapScreen() {
           screenOrientation === Orientation.LANDSCAPE_RIGHT ||
           screenOrientation === Orientation.LANDSCAPE_LEFT
             ? styles.mapLandscape
-            : styles.map}
+            : styles.map
+        }
         region={region}
       >
         <Marker
@@ -71,7 +65,11 @@ function MapScreen() {
         />
       </MapView>
       <Callout style={styles.buttonsContainer}>
-        <TouchableHighlight onPress={getLocation} style={styles.button} underlayColor={"#B6B8A8"}>
+        <TouchableHighlight
+          onPress={getLocation}
+          style={styles.button}
+          underlayColor={"#B6B8A8"}
+        >
           <Text style={styles.buttonText}>{text}</Text>
         </TouchableHighlight>
       </Callout>
