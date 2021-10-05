@@ -41,17 +41,14 @@ För att starta projektet, kör:
 - [Battery](https://docs.expo.dev/versions/v42.0.0/sdk/Battery/)
 - [Camera](https://docs.expo.dev/versions/v42.0.0/sdk/camera/)
 - [Device](https://docs.expo.dev/versions/v42.0.0/sdk/device/)
-- [ImagePicker](https://docs.expo.dev/versions/v42.0.0/sdk/imagepicker/)
 - [MediaLibrary](https://docs.expo.dev/versions/v42.0.0/sdk/media-library/)
 - [Sensors](https://docs.expo.dev/versions/v42.0.0/sdk/sensors/)
-- [StatusBar](https://docs.expo.dev/versions/v42.0.0/sdk/statusbar/)
 - [Location](https://docs.expo.dev/versions/v42.0.0/sdk/location/)
 - [ScreenOrientation](https://docs.expo.dev/versions/v42.0.0/sdk/screenorientation/)
 
 ### React Native
 
 - [Alert](https://docs.expo.dev/versions/v42.0.0/react-native/alert/)
-- [Button](https://docs.expo.dev/versions/v42.0.0/react-native/button/)
 - [Dimensions](https://docs.expo.dev/versions/v42.0.0/react-native/dimensions/)
 - [ScrollView](https://docs.expo.dev/versions/v42.0.0/react-native/scrollview/)
 - [TouchableHighlight](https://docs.expo.dev/versions/v42.0.0/react-native/touchablehighlight/)
@@ -60,6 +57,7 @@ För att starta projektet, kör:
 - [StyleSheet](https://docs.expo.dev/versions/v42.0.0/react-native/stylesheet/)
 - [Image](https://docs.expo.dev/versions/v42.0.0/react-native/image/)
 - [TouchableOpacity](https://docs.expo.dev/versions/v42.0.0/react-native/touchableopacity/)
+- [Modal](https://docs.expo.dev/versions/v42.0.0/react-native/modal/)
 
 ### Extern Modul
 
