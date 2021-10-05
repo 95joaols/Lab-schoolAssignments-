@@ -1,6 +1,6 @@
 import React, { FC, useContext } from "react";
 import { Image } from "react-native";
-import { styles } from "../constants/Styles";
+import { styles } from "../style/Styles";
 import { BackgroundImageContext } from "../contexts/BackgroundImageContext";
 
 const BackgroundImage: FC = () => {

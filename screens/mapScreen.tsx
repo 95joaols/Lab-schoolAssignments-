@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-import MapView, { Callout, Marker } from "react-native-maps";
-import { Text, View, TouchableHighlight, Modal } from "react-native";
-import { styles } from "../constants/Styles";
-import { ScreenOrientationContext } from "../contexts/ScreenOrientationContext";
 import { Orientation } from "expo-screen-orientation";
+import React, { useContext, useState } from "react";
+import { Modal, Text, TouchableHighlight, View } from "react-native";
+import MapView, { Callout, Marker } from "react-native-maps";
+import { ScreenOrientationContext } from "../contexts/ScreenOrientationContext";
 import { LocationContext } from "../contexts/sensors/locationContext";
+import { styles } from "../style/Styles";
 
 function MapScreen() {
   const Location = useContext(LocationContext);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { navigationTheme, navigatorTheme } from './constants/NavigationStyles';
+import { navigationTheme, navigatorTheme } from './style/NavigationStyles';
 import BackgroundImageProvider from './contexts/BackgroundImageContext';
 import BackgroundImage from './components/BackgroundImage';
 import HomeScreen from './screens/homeScreen';

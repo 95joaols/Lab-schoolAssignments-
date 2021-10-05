@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import {
   Platform, Text, View
 } from "react-native";
-import { styles } from "../../constants/SensorsStyles";
+import { styles } from "../../style/SensorsStyles";
 import { BarometerContext } from "../../contexts/sensors/BarometerContext";
 
 export default function BarometerInfo() {

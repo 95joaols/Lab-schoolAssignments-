@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Text, View } from "react-native";
-import { styles } from "../../constants/SensorsStyles";
+import { styles } from "../../style/SensorsStyles";
 import { AccelerometerContext } from "../../contexts/sensors/AccelerometerContext";
 
 export default function AccelerometerInfo() {

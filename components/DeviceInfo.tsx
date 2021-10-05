@@ -1,7 +1,7 @@
 import React from "react";
 import { Platform, Text, View, StyleSheet } from "react-native";
 import * as Device from "expo-device";
-import { styles } from "../constants/SensorsStyles";
+import { styles } from "../style/SensorsStyles";
 
 export default function DeviceInfo() {
   return (

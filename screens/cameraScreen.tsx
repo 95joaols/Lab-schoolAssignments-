@@ -4,7 +4,7 @@ import React, { FC, useEffect, useState } from "react";
 import { TouchableOpacity, Alert, Text, View } from "react-native";
 import * as Library from "expo-media-library";
 import Slider from "@react-native-community/slider";
-import { styles } from "../constants/cameraStyles";
+import { styles } from "../style/cameraStyles";
 
 const CameraScreen: FC = () => {
   const [cameraPermission, setCameraPermission] = useState<boolean>(false);
