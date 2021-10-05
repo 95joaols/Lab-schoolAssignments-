@@ -12,7 +12,6 @@ function MapScreen() {
   const { screenOrientation } = useContext(ScreenOrientationContext);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [errorMsg, setErrorMsg] = useState<string>();
   const [region, setRegion] = useState({
     latitude: 57.72107,
     longitude: 12.93982,
@@ -20,11 +19,7 @@ function MapScreen() {
     longitudeDelta: 0.01,
   });
 
-  if (Location.errorMsg) {
-    setErrorMsg(Location.errorMsg);
-  }
-
-  if (Location.grantedForeground?.status !== "granted") {
+  if (!Location.location) {
     return (
       <View style={styles.root}>
         <MapView
@@ -55,11 +50,15 @@ function MapScreen() {
           >
             <View style={styles.root}>
               <View style={styles.modalView}>
-                <Text style={styles.buttonText}>
-                  Map needs permission to access Device Location. {"\n\n"}
-                  Go to Settings {">"} Apps & notifications {">"} Expo Go {">"}{" "}
-                  Permissions. Allow "Location".
-                </Text>
+                {Location.errorMsg || !Location.grantedForeground ? (
+                  <Text style={styles.buttonText}>{Location.errorMsg}</Text>
+                ) : (
+                  <Text style={styles.buttonText}>
+                    Map needs permission to access Device Location. {"\n\n"}
+                    Go to Settings {">"} Apps & notifications {">"} Expo Go{" "}
+                    {">"} Permissions. Allow "Location".
+                  </Text>
+                )}
                 <TouchableHighlight
                   onPress={() => setModalVisible(!modalVisible)}
                   style={styles.button}
@@ -82,13 +81,6 @@ function MapScreen() {
     );
   }
 
-  let text = "Waiting..";
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (Location.location !== undefined) {
-    text = "Se Din Position";
-  }
-
   const getLocation = () => {
     if (Location.location !== undefined) {
       setRegion({
@@ -97,40 +89,40 @@ function MapScreen() {
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
       });
-    } else if (Location.location === undefined) {
-      text = "Location not available";
     }
   };
 
-  return (
-    <View style={styles.root}>
-      <MapView
-        style={
-          screenOrientation === Orientation.LANDSCAPE_RIGHT ||
-          screenOrientation === Orientation.LANDSCAPE_LEFT
-            ? styles.mapLandscape
-            : styles.map
-        }
-        region={region}
-      >
-        <Marker
-          coordinate={{
-            latitude: region.latitude,
-            longitude: region.longitude,
-          }}
-        />
-      </MapView>
-      <Callout style={styles.buttonsContainer}>
-        <TouchableHighlight
-          onPress={getLocation}
-          style={styles.button}
-          underlayColor={"#B6B8A8"}
+  if (Location.location) {
+    return (
+      <View style={styles.root}>
+        <MapView
+          style={
+            screenOrientation === Orientation.LANDSCAPE_RIGHT ||
+            screenOrientation === Orientation.LANDSCAPE_LEFT
+              ? styles.mapLandscape
+              : styles.map
+          }
+          region={region}
         >
-          <Text style={styles.buttonText}>{text}</Text>
-        </TouchableHighlight>
-      </Callout>
-    </View>
-  );
+          <Marker
+            coordinate={{
+              latitude: region.latitude,
+              longitude: region.longitude,
+            }}
+          />
+        </MapView>
+        <Callout style={styles.buttonsContainer}>
+          <TouchableHighlight
+            onPress={getLocation}
+            style={styles.button}
+            underlayColor={"#B6B8A8"}
+          >
+            <Text style={styles.buttonText}>Get Location</Text>
+          </TouchableHighlight>
+        </Callout>
+      </View>
+    );
+  }
 }
 
 export default MapScreen;
