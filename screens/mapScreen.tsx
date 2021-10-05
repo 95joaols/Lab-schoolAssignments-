@@ -2,7 +2,7 @@ import * as React from "react";
 import MapView, { Callout, Marker } from "react-native-maps";
 import { Text, View, TouchableHighlight } from "react-native";
 import { useEffect, useState } from "react";
-import { styles } from "../constants/Styles";
+import { styles } from "../style/Styles";
 import * as Location from "expo-location";
 import { ScreenOrientationContext } from "../contexts/ScreenOrientationContext";
 import { Orientation } from "expo-screen-orientation";

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Text, View } from "react-native";
-import { styles } from "../constants/SensorsStyles";
+import { styles } from "../style/SensorsStyles";
 import { BatteryContext } from "../contexts/sensors/BatteryContext";
 
 export default function BatteryInfo() {

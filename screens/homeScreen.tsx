@@ -1,7 +1,7 @@
 import { Orientation } from "expo-screen-orientation";
 import React, { useContext } from "react";
 import { View, Text, TouchableHighlight } from 'react-native';
-import { styles } from '../constants/Styles';
+import { styles } from '../style/Styles';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { ScreenOrientationContext } from "../contexts/ScreenOrientationContext";
 
