@@ -43,6 +43,24 @@ export const styles = StyleSheet.create({
         resizeMode: "cover",
         zIndex: -1,
     },
+    backgroundImagePreview: {
+        height: 400,
+        width: 300,
+    },
+    backgroundImagePreviewLandscape: {
+        height: 200,
+        width: 200,
+    },
+    backgroundImagePreviewContainer: {
+        borderWidth: 3,
+        borderColor: "white"
+    },
+    backgroundImagePreviewContainerLandscape: {
+        top: 10,
+        position: "absolute",
+        borderWidth: 3,
+        borderColor: "white"
+    },
     map: {
         width: Dimensions.get("window").width,
         height: Dimensions.get("window").height,
@@ -51,4 +69,19 @@ export const styles = StyleSheet.create({
         width: Dimensions.get("window").height,
         height: Dimensions.get("window").width, 
     },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+      },
 });
