@@ -22,15 +22,17 @@ export default function AccelerometerInfo() {
     );
   }
   else {
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        Accelerometer:
-      </Text>
-      <Text style={styles.paragraph}>
-        No Data
-      </Text>
-      <Text style={styles.paragraph}>Permissions:{accelerometer.granted?.status}</Text>
-    </View>
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          Accelerometer:
+        </Text>
+        <Text style={styles.paragraph}>
+          No Data
+        </Text>
+        <Text style={styles.paragraph}>Permissions:{accelerometer.granted?.status}</Text>
+      </View>
+    )
   }
 }
 
