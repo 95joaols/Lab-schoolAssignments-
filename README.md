@@ -6,6 +6,15 @@ Av: Rikard Friberg, Joacim Olsson, Mathias Millberg & Andreas Gunnarsson
 
 ## Beskrivning Av Projektet
 
+Då uppgiftsbeskrivningen av appens funktionalitet var valfri, så valde vi i detta projektet att mer fokusera på att testa och bekanta oss med expos olika moduler än att komma fram till någon komplett app-idé. 
+Vi valde var och en ut moduler som vi tyckte verkade intressanta och gjorde sen en prototyp för att få ihop en slags helhet i appen samt att ha en mall att förhålla sig till. 
+Resultatet blev en app med högst blandad funktionalitet. 
+En screen där vi hämtar och sammanställer data från telefonens olika sensorer.
+En screen men en karta där man kan se sin aktuella position.
+En screen där man med kameran kan ta bilder och spara i telefonen.
+Och slutligen en screen där man kan välja bilder från telefonens bildgalleri och använda som bakgrundsbild i appen.
+Stylingen i appen är även anpassad efter hurvida telefonen befinner sig i vertikalt eller horistontellt läge.
+
 ## Info Om Hur Projektet Bygg & Körs
 
 För att bygga projektet, kör:
