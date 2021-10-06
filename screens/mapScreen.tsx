@@ -19,6 +19,17 @@ function MapScreen() {
     longitudeDelta: 0.01,
   });
 
+  const getLocation = () => {
+    if (Location.location) {
+      setRegion({
+        latitude: Location.location?.coords.latitude,
+        longitude: Location.location?.coords.longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      });
+    }
+  };
+
   if (!Location.location) {
     return (
       <View style={styles.root}>
@@ -81,17 +92,6 @@ function MapScreen() {
     );
   }
 
-  const getLocation = () => {
-    if (Location.location !== undefined) {
-      setRegion({
-        latitude: Location.location?.coords.latitude,
-        longitude: Location.location?.coords.longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
-      });
-    }
-  };
-
   if (Location.location) {
     return (
       <View style={styles.root}>
@@ -123,6 +123,12 @@ function MapScreen() {
       </View>
     );
   }
+
+  return (
+    <View>
+      <Text>Something Went Wrong</Text>
+    </View>
+  )
 }
 
 export default MapScreen;
