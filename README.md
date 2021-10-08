@@ -32,7 +32,7 @@ För att starta projektet, kör:
 3. Git & GitHub har använts ***[JA]***
 4. Projektmappen innehåller en README.md fil  ***[JA]***
 5. Uppgiften lämnas in i tid! ***[JA]***
-6. Muntlig presentation är genomförd ***[NEJ]***
+6. Muntlig presentation är genomförd ***[JA]***
 
 ### Krav För Väl Godkänt
 
